@@ -1,5 +1,5 @@
 Tranzfiction::Application.configure do
-  config.session_store :cookie_store, :key => '_tranzfiction_session', :domain => "sf.elias-kuiter.de"
+  config.session_store :cookie_store, :key => '_tranzfiction_session', :domain => ".elias-kuiter.de"
   
   config.action_mailer.default_url_options = { :host => 'sf.elias-kuiter.de' }
   
