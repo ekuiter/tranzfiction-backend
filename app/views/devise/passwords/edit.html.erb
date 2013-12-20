@@ -1,0 +1,24 @@
+<% title "Passwort ändern" %>
+
+<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= devise_error_messages! %>
+  <%= f.hidden_field :reset_password_token %>
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+        <td>Neues Passwort</td>
+        <td><%= f.password_field :password, :autofocus => true %></td>
+      </tr>
+      <tr>
+        <td>Passwort bestätigen</td>
+        <td><%= f.password_field :password_confirmation %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><%= f.submit "Passwort ändern" %></td>
+      </tr>
+    </tbody>
+  </table>  
+<% end %>
+
+<%= render "devise/shared/links" %>

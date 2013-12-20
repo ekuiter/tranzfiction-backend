@@ -1,0 +1,38 @@
+<%= form_for(@user, url: admin_user_path(@user)) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <p><strong>Fehler beim Ausfüllen:</strong></p>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+        <td>E-Mail</td>
+        <td><%= f.email_field :email, :autofocus => true %></td>
+      </tr>
+      <tr>
+        <td>Neues Passwort</td>
+        <td><%= f.password_field :password %></td>
+      </tr>
+      <tr>
+        <td>Passwort bestätigen</td>
+        <td><%= f.password_field :password_confirmation %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><%= f.check_box :admin %> <%= f.label :admin %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><%= f.submit value: "Speichern" %></td>
+      </tr>
+    </tbody>
+  </table>  
+<% end %>

@@ -1,0 +1,22 @@
+// import the CSS framework
+@import "bootstrap";
+
+// make all images responsive by default
+img {
+  @extend .img-responsive;
+  margin: 0 auto;
+}
+
+// apply styles to HTML elements
+// to make views framework-neutral
+main {
+  @extend .container;
+  padding-bottom: 80px;
+  width: 100%;
+  margin-top: 51px; // accommodate the navbar
+}
+
+section {
+  @extend .row;
+  margin-top: 20px;
+}
