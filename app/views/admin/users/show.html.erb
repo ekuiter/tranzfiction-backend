@@ -10,6 +10,34 @@
       <td>Admin</td>
       <td><%= @user.admin? ? "Ja" : "Nein" %></td>
     </tr>
+    <tr>
+      <td>Registriert</td>
+      <td><%= l @user.created_at %></td>
+    </tr>
+    <tr>
+      <td>Bestätigt</td>
+      <td><%= l @user.confirmed_at %></td>
+    </tr>
+    <tr>
+      <td>Anzahl Logins</td>
+      <td><%= @user.sign_in_count %></td>
+    </tr>
+    <tr>
+      <td>Aktueller Login</td>
+      <td><%= l @user.current_sign_in_at %></td>
+    </tr>
+    <tr>
+      <td>Letzter Login</td>
+      <td><%= l @user.last_sign_in_at %></td>
+    </tr>
+    <tr>
+      <td>Aktuelle IP</td>
+      <td><%= @user.current_sign_in_ip %></td>
+    </tr>
+    <tr>
+      <td>Letzte IP</td>
+      <td><%= @user.last_sign_in_ip %></td>
+    </tr>
   </tbody>
 </table>
 
