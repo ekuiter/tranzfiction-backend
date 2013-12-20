@@ -8,6 +8,12 @@ gem 'uglifier', '>= 1.3.0' # JavaScript komprimieren
 gem 'jquery-rails' # JQuery einbinden
 gem 'turbolinks' # Turbolinks einbinden
 gem 'jbuilder', '~> 1.2' # für JSON APIs
+gem 'devise' # Login-System
+gem 'bootstrap-sass' # Twitter Bootstrap für die Benutzeroberfläche
+
+group :development do
+  gem 'rails_layout' # Bootstrap einrichten
+end
 
 group :doc do # für Dokumentation
   gem 'sdoc', require: false # bundle exec rake doc:rails

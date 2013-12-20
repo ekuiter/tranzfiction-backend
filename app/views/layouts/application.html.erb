@@ -1,14 +1,27 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Tranzfiction</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "tranzfiction" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "tranzfiction" %>">
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <header>
+      <%= render 'layouts/navigation' %>
+      </header>
+    <main role="main">
+      <div class="container">
+        <div class="row">
+           <div class="col-md-12">
+            <%= render 'layouts/messages' %>
+            <h1><%= content_for?(:title) ? yield(:title) : "tranzfiction" %></h1>
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
 </html>
