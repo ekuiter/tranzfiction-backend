@@ -13,45 +13,45 @@ de:
     failure:
       already_authenticated: ''
       unauthenticated: ''
-      unconfirmed: 'Sie müssen Ihren Account bestätigen, bevor Sie fortfahren können.'
-      locked: 'Ihr Account ist gesperrt.'
+      unconfirmed: 'Du musst deinen Account bestätigen, bevor du fortfahren kannst.'
+      locked: 'Dein Account ist gesperrt.'
       invalid: 'Ungültige Anmeldedaten.'
       invalid_token: 'Der Anmelde-Token ist ungültig.'
-      timeout: 'Ihre Sitzung ist abgelaufen, bitte melden Sie sich erneut an.'
-      inactive: 'Ihr Account ist nicht aktiv.'
+      timeout: 'Deine Sitzung ist abgelaufen, bitte melde dich erneut an.'
+      inactive: 'Dein Account ist nicht aktiv.'
       user:
         not_found_in_database: 'Ungültige Anmeldedaten.'
     sessions:
       signed_in: 'Erfolgreich angemeldet.'
       signed_out: 'Erfolgreich abgemeldet.'
     passwords:
-      send_instructions: 'Sie erhalten in wenigen Minuten eine E-Mail mit der Anleitung, wie Sie ihr Passwort zurücksetzen können.'
-      updated: 'Ihr Passwort wurde geändert. Sie sind jetzt angemeldet.'
-      updated_not_active: 'Ihr Passwort wurde geändert.'
-      send_paranoid_instructions: "Falls Ihre E-Mail-Adresse in unserer Datenbank existiert erhalten Sie in wenigen Minuten eine E-Mail mit der Anleitung, wie Sie Ihr Passwort zurücksetzen können."
+      send_instructions: 'Du erhältst in wenigen Minuten eine E-Mail mit der Anleitung, wie du dein Passwort zurücksetzen kannst.'
+      updated: 'Dein Passwort wurde geändert. Du bist jetzt angemeldet.'
+      updated_not_active: 'Dein Passwort wurde geändert.'
+      send_paranoid_instructions: "Falls deine E-Mail-Adresse in unserer Datenbank existiert, erhältst du in wenigen Minuten eine E-Mail mit der Anleitung, wie du dein Passwort zurücksetzen kannst."
     confirmations:
-      send_instructions: 'Sie erhalten in wenigen Minuten eine E-Mail, mit der Sie Ihre Registrierung bestätigen können.'
-      send_paranoid_instructions: 'Falls Ihre E-Mail-Adresse in unserer Datenbank existiert erhalten Sie in wenigen Minuten eine E-Mail mit der die Sie Ihre Registrierung bestätigen können.'
-      confirmed: 'Vielen Dank für Ihre Registrierung. Sie sind jetzt angemeldet.'
+      send_instructions: 'Du erhältst in wenigen Minuten eine E-Mail, mit der du deine Registrierung bestätigen kannst.'
+      send_paranoid_instructions: 'Falls deine E-Mail-Adresse in unserer Datenbank existiert, erhältst du in wenigen Minuten eine E-Mail mit der du deine Registrierung bestätigen kannst.'
+      confirmed: 'Vielen Dank für deine Registrierung. Du bist jetzt angemeldet.'
     registrations:
-      signed_up: 'Sie haben sich erfolgreich registriert.'
-      signed_up_but_unconfirmed: 'Sie haben sich erfolgreich registriert. Wir konnten Sie noch nicht anmelden, da Ihr Account noch nicht bestätigt ist. Sie erhalten in Kürze eine E-Mail mit der Anleitung, wie Sie Ihren Account freischalten können.'
-      signed_up_but_inactive: 'Sie haben sich erfolgreich registriert. Wir konnten Sie noch nicht anmelden, da Ihr Account inaktiv ist.'
-      signed_up_but_locked: 'Sie haben sich erfolgreich registriert. Wir konnten Sie noch nicht anmelden, da Ihr Account gesperrt ist.'
-      updated: 'Ihre Daten wurden aktualisiert.'
-      update_needs_confirmation: "Ihre Daten wurden aktualisiert, aber Sie müssen Ihre neue E-Mail-Adresse bestätigen. Sie erhalten in wenigen Minuten eine E-Mail, mit der Sie die Änderung Ihrer E-Mail-Adresse abschließen können."
-      destroyed: 'Ihr Account wurde gelöscht.'
+      signed_up: 'Du hast dich erfolgreich registriert.'
+      signed_up_but_unconfirmed: 'Du hast dich erfolgreich registriert. Wir konnten dich noch nicht anmelden, da dein Account noch nicht bestätigt ist. Du erhältst in Kürze eine E-Mail mit der Anleitung, wie du deinen Account freischalten kannst.'
+      signed_up_but_inactive: 'Du hast dich erfolgreich registriert. Wir konnten dich noch nicht anmelden, da dein Account inaktiv ist.'
+      signed_up_but_locked: 'Du hast dich erfolgreich registriert. Wir konnten dich noch nicht anmelden, da dein Account gesperrt ist.'
+      updated: 'Deine Daten wurden aktualisiert.'
+      update_needs_confirmation: "Deine Daten wurden aktualisiert, aber du musst deine neue E-Mail-Adresse bestätigen. Du erhältst in wenigen Minuten eine E-Mail, mit der du die Änderung deiner E-Mail-Adresse abschließen kannst."
+      destroyed: 'Dein Account wurde gelöscht.'
     unlocks:
-      send_instructions: 'Sie erhalten in wenigen Minuten eine E-Mail mit der Anleitung, wie Sie Ihren Account entsperren können.'
-      unlocked: 'Ihr Account wurde entsperrt. Sie sind jetzt angemeldet.'
-      send_paranoid_instructions: "Falls Ihre E-Mail-Adresse in unserer Datenbank existiert erhalten Sie in wenigen Minuten eine E-Mail mit der Anleitung, wie Sie Ihren Account entsperren können."
+      send_instructions: 'Du erhältst in wenigen Minuten eine E-Mail mit der Anleitung, wie du deinen Account entsperren kannst.'
+      unlocked: 'Dein Account wurde entsperrt. Du bist jetzt angemeldet.'
+      send_paranoid_instructions: "Falls deine E-Mail-Adresse in unserer Datenbank existiert, erhältst du in wenigen Minuten eine E-Mail mit der Anleitung, wie du deinen Account entsperren kannst."
     omniauth_callbacks:
-      success: 'Die haben sich erfolgreich mit Ihrem %{kind}-Account angemeldet.'
-      failure: 'Sie konnten nicht Ihrem %{kind}-Account angemeldet werden, weil "%{reason}".'
+      success: 'Du hast dich erfolgreich mit deinem %{kind}-Account angemeldet.'
+      failure: 'Du konntest nicht mit deinem %{kind}-Account angemeldet werden, weil "%{reason}".'
     mailer:
       confirmation_instructions:
-        subject: 'Anleitung zur Bestätigung Ihres Accounts'
+        subject: 'Bestätigung deines tranzfiction Accounts'
       reset_password_instructions:
-        subject: 'Anleitung um Ihr Passwort zurückzusetzen'
+        subject: 'Zurücksetzen deines tranzfiction Passworts'
       unlock_instructions:
-        subject: 'Anleitung um Ihren Account freizuschalten'
+        subject: 'Freischalten deines tranzfiction Accounts'

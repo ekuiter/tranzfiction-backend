@@ -1,4 +1,9 @@
 class SessionsController < Devise::SessionsController
+  def new
+      flash[:notice] = session.delete(:registration_flash) if session[:registration_flash]
+      super
+    end
+  
   def create
     resource = warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failure")
     sign_in_and_redirect(resource_name, resource)
@@ -12,6 +17,6 @@ class SessionsController < Devise::SessionsController
   end
 
   def failure
-    return render :json => {:success => false, :errors => ["Login failed."]}
+    return render :json => {:success => false, :errors => ["Anmeldung fehlgeschlagen."]}
   end
 end

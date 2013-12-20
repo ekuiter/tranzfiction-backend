@@ -1,5 +1,7 @@
-<p>Willkommen <%= @email %>!</p>
+<h3>Willkommen, <%= @email %>!</h3>
 
 <p>Du kannst deinen Account hier aktivieren:</p>
 
-<p><%= link_to 'Account bestätigen', confirmation_url(@resource, :confirmation_token => @token) %></p>
+<p><strong><%= link_to 'Account bestätigen', confirmation_url(@resource, :confirmation_token => @token) %></strong></p>
+
+<p style="font-size:0.6em"><em>(Bitte antworte nicht auf diese Mail. Sie wurde automatisch generiert.)</em></p>

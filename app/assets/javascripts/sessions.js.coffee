@@ -4,4 +4,13 @@
 
 $(document).ready ->
   $("form#new_user").bind "ajax:success", (e, data, status, xhr) ->
-    window.location.reload()
+    if data.success
+      window.location.reload()
+    else
+      if data
+        error = data.errors[0]
+      else
+        error = 'Du musst deinen Account aktivieren, bevor du dich anmelden kannst.'
+      $(".messages").html('<div class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <div>'+error+'</div></div>')

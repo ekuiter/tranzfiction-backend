@@ -1,13 +1,13 @@
 <% title "Bestätigungs-Mail erneut senden" %>
 
-<%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
+<%= form_for(resource, :as => resource_name, :url => user_confirmation_path, :html => { :method => :post }) do |f| %>
   <%= devise_error_messages! %>
   
   <table class="table table-striped">
     <tbody>
       <tr>
-        <td>Neues Passwort</td>
-        <td><%= f.password_field :password, :autofocus => true %></td>
+        <td>E-Mail</td>
+        <td><%= f.email_field :email, :autofocus => true %></td>
       </tr>
       <tr>
         <td></td>
