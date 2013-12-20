@@ -1,4 +1,6 @@
 Tranzfiction::Application.configure do
+  config.session_store :cookie_store, key: '_tranzfiction_session', domain: :all
+
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   
   # Settings specified here will take precedence over those in config/application.rb.
