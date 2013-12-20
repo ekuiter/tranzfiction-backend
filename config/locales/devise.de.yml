@@ -32,10 +32,10 @@ de:
     confirmations:
       send_instructions: 'Du erhältst in wenigen Minuten eine E-Mail, mit der du deine Registrierung bestätigen kannst.'
       send_paranoid_instructions: 'Falls deine E-Mail-Adresse in unserer Datenbank existiert, erhältst du in wenigen Minuten eine E-Mail mit der du deine Registrierung bestätigen kannst.'
-      confirmed: 'Vielen Dank für deine Registrierung. Du bist jetzt angemeldet.'
+      confirmed: 'Vielen Dank für deine Registrierung. Du kannst dich jetzt anmelden.'
     registrations:
       signed_up: 'Du hast dich erfolgreich registriert.'
-      signed_up_but_unconfirmed: 'Du hast dich erfolgreich registriert. Wir konnten dich noch nicht anmelden, da dein Account noch nicht bestätigt ist. Du erhältst in Kürze eine E-Mail mit der Anleitung, wie du deinen Account freischalten kannst.'
+      signed_up_but_unconfirmed: 'Du hast dich erfolgreich registriert. Du erhältst in Kürze eine E-Mail, mit der du deinen Account bestätigen kannst.'
       signed_up_but_inactive: 'Du hast dich erfolgreich registriert. Wir konnten dich noch nicht anmelden, da dein Account inaktiv ist.'
       signed_up_but_locked: 'Du hast dich erfolgreich registriert. Wir konnten dich noch nicht anmelden, da dein Account gesperrt ist.'
       updated: 'Deine Daten wurden aktualisiert.'
