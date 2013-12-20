@@ -10,6 +10,8 @@ gem 'turbolinks' # Turbolinks einbinden
 gem 'jbuilder', '~> 1.2' # für JSON APIs
 gem 'devise' # Login-System
 gem 'bootstrap-sass' # Twitter Bootstrap für die Benutzeroberfläche
+# CORS = Cross-Origin Resource Sharing -> AJAX zulassen von sf.elias-kuiter.de zu b.sf.elias-kuiter.de
+gem 'rack-cors', :require => 'rack/cors'
 
 group :development do
   gem 'rails_layout' # Bootstrap einrichten
