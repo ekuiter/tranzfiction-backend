@@ -1,0 +1,2 @@
+class ScienceBuilding < SpecialBuilding
+end

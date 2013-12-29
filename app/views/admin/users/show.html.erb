@@ -16,7 +16,7 @@
     </tr>
     <tr>
       <td>Bestätigt</td>
-      <td><%= l @user.confirmed_at %></td>
+      <td><%= @user.confirmed_at? ? l(@user.confirmed_at) : "Nie" %></td>
     </tr>
     <tr>
       <td>Anzahl Logins</td>
@@ -24,19 +24,19 @@
     </tr>
     <tr>
       <td>Aktueller Login</td>
-      <td><%= l @user.current_sign_in_at %></td>
+      <td><%= @user.current_sign_in_at? ? l(@user.current_sign_in_at) : "Nie" %></td>
     </tr>
     <tr>
       <td>Letzter Login</td>
-      <td><%= l @user.last_sign_in_at %></td>
+      <td><%= @user.last_sign_in_at? ? l(@user.last_sign_in_at) : "Nie" %></td>
     </tr>
     <tr>
       <td>Aktuelle IP</td>
-      <td><%= @user.current_sign_in_ip %></td>
+      <td><%= @user.current_sign_in_ip? ? @user.current_sign_in_ip : "Nie" %></td>
     </tr>
     <tr>
       <td>Letzte IP</td>
-      <td><%= @user.last_sign_in_ip %></td>
+      <td><%= @user.lastn_sign_in_ip? ? @user.last_sign_in_ip : "Nie" %></td>
     </tr>
   </tbody>
 </table>

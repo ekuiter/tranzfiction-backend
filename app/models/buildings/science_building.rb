@@ -1,0 +1,2 @@
+class EducationBuilding < SpecialBuilding
+end

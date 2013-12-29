@@ -1,0 +1,2 @@
+class SpecialBuilding < Building
+end

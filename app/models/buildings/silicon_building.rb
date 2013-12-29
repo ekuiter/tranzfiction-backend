@@ -1,0 +1,2 @@
+class SiliconBuilding < ResourceBuilding
+end

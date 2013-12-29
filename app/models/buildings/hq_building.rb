@@ -1,0 +1,2 @@
+class HQBuilding < SpecialBuilding
+end

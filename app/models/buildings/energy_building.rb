@@ -1,0 +1,2 @@
+class EnergyBuilding < Building
+end

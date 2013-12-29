@@ -17,7 +17,7 @@
       <td><%= user.email %></td>
       <td><%= user.admin? ? "Ja" : "Nein" %></td>
       <td><%= user.sign_in_count %></td>
-      <td><%= user.current_sign_in_at.strftime("%H:%M Uhr") %></td>
+      <td><%= user.current_sign_in_at? ? user.current_sign_in_at.strftime("%H:%M Uhr") : "Nie" %></td>
       <td><%= link_to 'Anzeigen', admin_user_path(user) %>&nbsp;&nbsp;&nbsp;
         <%= link_to 'Bearbeiten', edit_admin_user_path(user) %>&nbsp;&nbsp;&nbsp;
         <%= link_to 'Löschen', admin_user_path(user), method: :delete, data: { confirm: 'Sicher?' } %></td>
