@@ -6,4 +6,14 @@ class ApplicationController < ActionController::Base
   http_basic_authenticate_with name: "sf", password: "sf256"
   
   before_filter :authenticate_user!
+  
+  around_filter :catch
+  
+  def catch
+    begin
+      yield
+    rescue ActiveRecord::RecordNotFound => e
+      render json: "diese ID existiert nicht"
+    end
+  end
 end

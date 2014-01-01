@@ -1,6 +1,6 @@
 class CityController < ApplicationController
   
-  before_filter :set_city, only: [:show]
+  before_filter :set_city, only: [:show, :destroy]
   
   def index
     render json: current_user.cities
@@ -17,6 +17,11 @@ class CityController < ApplicationController
   
   def show
     render json: @city
+  end
+  
+  def destroy
+    @city.destroy
+    render json: "Stadt gelöscht"
   end
   
   private

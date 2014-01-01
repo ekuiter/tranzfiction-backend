@@ -1,7 +1,7 @@
 class BuildingController < ApplicationController
   
   before_filter :set_city, only: [:index, :create]
-  before_filter :set_building, only: [:show]
+  before_filter :set_building, only: [:show, :destroy]
   
   def index
     render json: @city.buildings
@@ -18,6 +18,11 @@ class BuildingController < ApplicationController
   
   def show
     render json: @building
+  end
+  
+  def destroy
+    @building.destroy
+    render json: "Gebäude gelöscht"
   end
   
   private

@@ -1,46 +1,24 @@
 <% title "Start" %>
+
 <p>Dies ist das Backend von tranzfiction.</p>
 <p>Um zu spielen, besuche <%= link_to "das Frontend", "http://sf.elias-kuiter.de/" %>.</p>
 
 <h3>Spielstand</h3>
 
-<p>Dir gehören die folgenden Städte: <sub>Dies sind die internen IDs deiner Städte.</sub> (<%= link_to "Stadt erstellen", new_city_url %>)</p>
+<p>Dir gehören die folgenden Städte:</p>
 
 <% if @cities.empty? %>
 <p><strong>Du hast noch keine Städte.</strong></p>
 <% else %>
 <ul>
   <% @cities.each do |city| %>
-  <li><%= link_to city.name, city %> <sub><%= city.id %></sub>
+  <li><%= link_to city.name, city, class: [:big, :ajax] %>
     <ul>
       <% city.buildings.each do |building| %>
-      <li><%= link_to building.type, building_path(city_id: building.city.id, building_id: building.id) %> <sub><%= building.id %></sub></li>
+      <li><%= link_to "#{building.title}", building_path(city_id: building.city.id, building_id: building.id), class: [:big, :ajax] %> (Lvl. <%= building.level %>)</li>
       <% end %>
     </ul>
   </li>
   <% end %>
 </ul>
 <% end %>
-
-<h3>API</h3>
-
-<p>Die JSON-API ermöglicht das Steuern des Spiels vom Frontend aus. Die URLs können auch mit dem Browser getestet werden.</p>
-<p>Um zum Beispiel eine Stadt ohne Umweg über das Frontend anzulegen, genügt der folgende Aufruf:</p>
-<p><%= link_to create_city_url + "?city[name]=", create_city_path + "?city[name]=" %><strong>&lt;Name der Stadt&gt;</strong></p>
-<h4>API-Übersicht</h4>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>URL</th>
-      <th>Funktion</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% Actions::backend_actions.each do |action| %>
-    <tr>
-      <td><%= link_to action_link(action, :url), action_link(action, :path) %></td>
-      <td><%= action[1][:desc] %></td>
-    </tr>
-    <% end %>
-  <tbody>
-</table>
