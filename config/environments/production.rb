@@ -1,5 +1,5 @@
 Tranzfiction::Application.configure do
-  config.session_store :cookie_store, key: '_tranzfiction_session', domain: ".elias-kuiter.de", httponly: false
+  config.session_store :cookie_store, key: '_tranzfiction_session', domain: ".tranzfiction.com", httponly: false
   
   config.action_mailer.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
@@ -11,7 +11,7 @@ Tranzfiction::Application.configure do
       :domain         => 'heroku.com',
     :enable_starttls_auto => true
   }
-  config.action_mailer.default_url_options = { :host => 'b.sf.elias-kuiter.de' }
+  config.action_mailer.default_url_options = { :host => 'api.tranzfiction.com' }
   
   # Settings specified here will take precedence over those in config/application.rb.
 
