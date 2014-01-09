@@ -2,7 +2,7 @@ module Defaults
   
   module User
     def self.city_limit
-      1
+      3
     end
     
     def self.registerable
