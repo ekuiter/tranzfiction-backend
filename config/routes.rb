@@ -24,6 +24,11 @@ module Actions
 end
 
 Tranzfiction::Application.routes.draw do
+  unless Defaults::User::registerable
+    get 'users/sign_up' => redirect('/422.html')
+    post 'users' => redirect('/422.html')
+  end
+  
   devise_for :users, :controllers => {sessions: "sessions", registrations: "registrations"}
   
   root to: "meta#home"

@@ -4,6 +4,10 @@ module Defaults
     def self.city_limit
       1
     end
+    
+    def self.registerable
+      false
+    end
   end
   
   module City
