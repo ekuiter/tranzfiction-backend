@@ -5,7 +5,7 @@ run Rails.application
 
 use Rack::Cors do
   allow do
-    origins 'sf.elias-kuiter.de'
+    origins 'tranzfiction.com'
     resource '*'
   end
 end
