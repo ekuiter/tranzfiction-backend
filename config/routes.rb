@@ -1,8 +1,4 @@
 module Actions
-  def self.frontend_url
-    "http://tranzfiction.com/"
-  end
-  
   def self.frontend_actions 
     {
       new_city: { path: "city/new", desc: "Erstellt eine neue Stadt." },
@@ -40,7 +36,7 @@ Tranzfiction::Application.routes.draw do
   end
   
   Actions::frontend_actions.each do |name, action|
-    get action[:path], to: redirect(Actions::frontend_url + action[:path]), as: name
+    get action[:path], to: redirect(Defaults::Routes::frontend_url + action[:path]), as: name
   end
   
   Actions::backend_actions.each do |name, action|

@@ -16,4 +16,10 @@ module Defaults
     end
   end
   
+  module Routes
+    def self.frontend_url
+      "http://tranzfiction.com/"
+    end
+  end
+  
 end
