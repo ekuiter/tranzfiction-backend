@@ -1,6 +1,6 @@
 module Actions
   def self.frontend_url
-    "http://sf.elias-kuiter.de/"
+    "http://tranzfiction.com/"
   end
   
   def self.frontend_actions 
