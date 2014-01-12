@@ -16,9 +16,7 @@
 //= require bootstrap
 //= require_tree .
 
-function ready()
- {
-     // MAKE SURE YOUR SELECTOR MATCHES SOMETHING IN YOUR HTML!!!
+function ready() {
      $('a.ajax').each(function() {
          $(this).qtip({
             content: {
@@ -43,6 +41,6 @@ function ready()
             style: 'qtip-wiki'
          });
      });
- }
- $(document).ready(ready);
- $(document).on('page:load', ready);
+}
+$(document).ready(ready);
+$(document).on('page:load', ready);

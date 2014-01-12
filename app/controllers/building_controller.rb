@@ -1,18 +1,19 @@
 class BuildingController < ApplicationController
   
   before_filter :set_city, only: [:index, :create]
-  before_filter :set_building, only: [:show, :destroy]
+  before_filter :set_building, only: [:show, :destroy, :upgrade, :downgrade]
+  before_filter :admin, only: [:downgrade]
   
   def index
     render json: @city.buildings
   end
   
   def create
-    @building = @city.buildings.new(building_params.merge(level: 1) )
+    @building = @city.buildings.new(building_params.merge(level: 1))
     if @building.save
       render json: @building
     else
-      render json: @building.errors, status: :unprocessable_entity
+      render json: @building.errors
     end
   end
   
@@ -23,6 +24,14 @@ class BuildingController < ApplicationController
   def destroy
     @building.destroy
     render json: "Gebäude gelöscht"
+  end
+  
+  def upgrade
+    render json: @building.upgrade
+  end
+  
+  def downgrade
+    render json: @building.downgrade
   end
   
   private

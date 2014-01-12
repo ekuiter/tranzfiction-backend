@@ -5,7 +5,7 @@ class City < ActiveRecord::Base
   validates :user, presence: true
   validates :name, presence: true, length: { minimum: 3, maximum: 50 }, uniqueness: { scope: :user_id }
   validate :city_limit
-  
+
   def as_json(methods)
     JSON.parse to_s
   end
@@ -16,12 +16,20 @@ class City < ActiveRecord::Base
     end.target!
   end
   
+  def reset
+    if buildings.destroy_all
+      self
+    else
+      errors
+    end
+  end
+  
   private
   
   def city_limit
     limit = user.city_limit
     cities = limit == 1 ? "Stadt" : "Städte"
-    errors.add(:base, "du darfst nur #{limit} #{cities} bauen") if user.city_count >= limit
+    errors.add(:base, "Du darfst nur #{limit} #{cities} haben") if user.cities.count >= limit
   end
   
   def build_speed

@@ -2,7 +2,7 @@ class Building < ActiveRecord::Base
   belongs_to :city
   
   validates :city_id, presence: true
-  validates :level, presence: true
+  validates :level, presence: true, numericality: { greater_than: 0 }
   validates :type, presence: true
   validate :valid_type
   
@@ -18,8 +18,8 @@ class Building < ActiveRecord::Base
   
   def valid_type
     begin
-      # damit der Gebäudetyp korrekt ist, muss das Gebäude von Building abgeleitet sein,
-      # darf aber (wie Resource-, Energy- oder SpecialBuilding) keine direkte Kindklasse sein.
+      # damit der Gebäudetyp korrekt ist, muss das Gebäude von Building abgeleitet sein (<),
+      # darf aber (wie Resource-, Energy- oder SpecialBuilding) keine direkte Kindklasse sein (superclass !=).
       valid = type.constantize < Building && type.constantize.superclass != Building
     rescue
       valid = false
@@ -35,32 +35,51 @@ class Building < ActiveRecord::Base
   # diese Funktionen sind für jeden Gebäudetyp spezifisch,
   # hier geben sie als Platzhalter Fehlermeldungen zurück
   
+  def stub message
+    "#{self.class.to_s}: #{message}"
+  end
+  
   def title
-    "Titel fehlt"
+    stub "Titel fehlt"
   end
   
   def description
-    "Beschreibung fehlt"
+    stub "Beschreibung fehlt"
   end
   
   def image
-    "Bild fehlt"
+    stub "Bild fehlt"
   end
   
   def energy_consumption
-    "Energieverbrauch fehlt"
+    stub "Energieverbrauch fehlt"
   end
   
   def upgrade_resources
-    "Ressourcenverbrauch fehlt"
+    stub "Ressourcenverbrauch fehlt"
   end
   
   def process
-    stub("process() undefiniert")
+    raise stub("process() undefiniert")
   end
   
+  # diese Funktionen sind unabhängig vom Gebäudetyp
   def upgrade
-    stub("upgrade() undefiniert")
+    write_attribute :level, level + 1
+    if save
+      self
+    else
+      errors
+    end
+  end
+  
+  def downgrade
+    write_attribute :level, level - 1
+    if save
+      self
+    else
+      errors
+    end
   end
   
 end

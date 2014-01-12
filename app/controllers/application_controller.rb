@@ -1,17 +1,19 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  
   before_filter :authenticate_user!
-  
   around_filter :catch
+  
+  private
   
   def catch
     begin
       yield
     rescue ActiveRecord::RecordNotFound => e
-      render json: "diese ID existiert nicht"
+      render json: "Diese ID existiert nicht"
     end
+  end
+  
+  def admin
+    render json: "Keine Berechtigung!" unless current_user.try(:admin?)
   end
 end

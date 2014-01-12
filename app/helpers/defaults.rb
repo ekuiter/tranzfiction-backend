@@ -1,5 +1,4 @@
 module Defaults
-  
   module User
     def self.city_limit
       3
@@ -21,5 +20,4 @@ module Defaults
       "http://tranzfiction.com/"
     end
   end
-  
 end

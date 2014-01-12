@@ -1,7 +1,15 @@
-Tranzfiction::Application.configure do
+Tranzfiction::Application.configure do 
+  
+  # Zusätzliche Einstellungen
+  # =====================
+  
+  # das Session-Cookie gilt auf dem gesamten localhost (s. production.rb)
   config.session_store :cookie_store, key: '_tranzfiction_session', domain: :all, httponly: false
-
+  # der Absender der Mails wird gesetzt
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  
+  # Standardeinstellungen
+  # =====================
   
   # Settings specified here will take precedence over those in config/application.rb.
 

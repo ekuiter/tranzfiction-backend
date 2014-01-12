@@ -1,6 +1,7 @@
 class CityController < ApplicationController
   
-  before_filter :set_city, only: [:show, :destroy]
+  before_filter :set_city, only: [:show, :destroy, :reset]
+  before_filter :admin, only: [:reset]
   
   def index
     render json: current_user.cities
@@ -11,7 +12,7 @@ class CityController < ApplicationController
     if @city.save
       render json: @city
     else
-      render json: @city.errors, status: :unprocessable_entity
+      render json: @city.errors
     end
   end
   
@@ -22,6 +23,10 @@ class CityController < ApplicationController
   def destroy
     @city.destroy
     render json: "Stadt gelöscht"
+  end
+  
+  def reset
+    render json: @city.reset
   end
   
   private
