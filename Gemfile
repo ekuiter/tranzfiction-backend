@@ -4,7 +4,7 @@ ruby '2.0.0'                   # aktuelle Ruby-Version
 gem 'rails',        '4.0.0'    # Ruby on Rails
 gem 'rails_12factor'           # Anpassungen für Rails 4 auf Heroku
 gem 'unicorn'                  # Webserver, der mehrere Anfragen zugleich unterstützt
-gem 'pg', group: :production   # Heroku PostgreSQL-Datenbank
+gem 'mysql2'                   # MySQL-Datenbank
 gem 'sass-rails',   '~> 4.0.0' # SASS zu CSS kompilieren
 gem 'coffee-rails', '~> 4.0.0' # CoffeeScript zu JavaScript kompilieren
 gem 'uglifier',     '>= 1.3.0' # JavaScript komprimieren
@@ -20,7 +20,6 @@ gem 'sdoc', require: false, group: :doc   # bundle exec rake doc:rails
 group :development, :test do   # beim Testen und in der Entwicklung:
   gem 'rspec-rails'            # Test-Framework RSpec
   gem 'factory_girl_rails'     # App mit Testdaten füttern
-  gem 'sqlite3'                # SQLite-Datenbank
 end
   
 group :test do                 # nur beim Testen:
