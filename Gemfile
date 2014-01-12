@@ -25,4 +25,4 @@ end
 gem 'pg'
 gem 'rails_12factor'
 
-# gem 'unicorn' # Webserver, der mehrere Anfragen zugleich unterstützt
+gem 'unicorn' # Webserver, der mehrere Anfragen zugleich unterstützt

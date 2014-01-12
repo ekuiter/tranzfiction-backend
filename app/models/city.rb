@@ -24,15 +24,15 @@ class City < ActiveRecord::Base
     end
   end
   
+  def build_speed
+    Defaults::City::build_speed
+  end
+  
   private
   
   def city_limit
     limit = user.city_limit
     cities = limit == 1 ? "Stadt" : "Städte"
     errors.add(:base, "Du darfst nur #{limit} #{cities} haben") if user.cities.count >= limit
-  end
-  
-  def build_speed
-    Defaults::City::build_speed
   end
 end
