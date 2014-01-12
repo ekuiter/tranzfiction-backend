@@ -8,6 +8,7 @@ module Actions
   # Die Beschreibung der API. Wirkt sich direkt auf die verfügbaren Routen aus und wird im Backend zur Dokumentation der API genutzt.
   def self.backend_actions
     {
+      user:               { path: "user",             to: "meta#user",    desc: "Zeigt Informationen zum aktuell eingeloggten Benutzer an." },
       cities:             { path: "city",             to: "city#index",   desc: "Zeigt alle deine Städte an." },
       create_city:        { path: "city/create",      to: "city#create",  desc: "Erstellt eine neue Stadt. Der Name wird als ?city[name]=*name* angehängt." },
       destroy_city:       { path: "city/:id/destroy", to: "city#destroy", desc: "Löscht die Stadt mit der ID *city_id*." },

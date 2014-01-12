@@ -12,6 +12,16 @@ class User < ActiveRecord::Base
   validate :validate_last_admin
   before_destroy :preserve_last_admin
   
+  def as_json(methods)
+    JSON.parse to_s
+  end
+  
+  def to_s
+    Jbuilder.new do |json|
+      json.(self, :id, :email, :admin)
+    end.target!
+  end
+  
   def city_limit
     Defaults::User::city_limit
   end
