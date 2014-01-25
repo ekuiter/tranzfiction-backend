@@ -6,6 +6,11 @@ class MetaController < ApplicationController
   end
   
   def api
+    types = Building.valid_types
+    @types = { EnergyBuilding: [], ResourceBuilding: [], SpecialBuilding: [] }
+    types.map do |type|
+      @types[type.constantize.superclass.to_s.to_sym].push type
+    end
   end
   
   def user
