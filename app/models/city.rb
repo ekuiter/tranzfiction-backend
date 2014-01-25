@@ -31,6 +31,7 @@ class City < ActiveRecord::Base
   private
   
   def city_limit
+    return unless user
     limit = user.city_limit
     cities = limit == 1 ? "Stadt" : "Städte"
     errors.add(:base, "Du darfst nur #{limit} #{cities} haben") if user.cities.count >= limit

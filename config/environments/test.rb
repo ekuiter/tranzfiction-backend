@@ -1,11 +1,24 @@
 Tranzfiction::Application.configure do
+  
+  # Zusätzliche Einstellungen
+  # =====================
+
+  # der Absender der Mails wird gesetzt
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_view.logger = config.action_mailer.logger = nil
+  
+  # Standardeinstellungen
+  # =====================
+  
   # Settings specified here will take precedence over those in config/application.rb.
 
   # The test environment is used exclusively to run your application's
   # test suite. You never need to work with it otherwise. Remember that
   # your test database is "scratch space" for the test suite and is wiped
   # and recreated between test runs. Don't rely on the data there!
-  config.cache_classes = true
+  
+  # ... not entirely true because we use Spork here for faster RSpec testing. So it's set to false:
+  config.cache_classes = false
 
   # Do not eager load code on boot. This avoids loading your whole application
   # just for the purpose of running a single test. If you are using a tool that
@@ -33,4 +46,6 @@ Tranzfiction::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+  
+  config.log_level = :info
 end

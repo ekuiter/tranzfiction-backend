@@ -27,6 +27,8 @@ class Building < ActiveRecord::Base
     errors.add(:type, "ungültig") unless valid
   end
   
+  private
+  
   # Unendlichkeit (wird für die einzelnen Gebäudetypen benötigt)
   def infinity
     +1.0 / 0.0 # Wert der positiven Unendlichkeit in Ruby
@@ -38,6 +40,8 @@ class Building < ActiveRecord::Base
   def stub message
     "#{self.class.to_s}: #{message}"
   end
+  
+  public
   
   def title
     stub "Titel fehlt"
@@ -80,6 +84,18 @@ class Building < ActiveRecord::Base
     else
       errors
     end
+  end
+  
+  def self.valid_types
+    types = []
+    Dir.glob(Rails.root.join("app", "models", "buildings", "**", "*.rb").to_s) do |file|
+      types.push File.basename(file, ".*")
+    end
+    types = types.map { |file| file.camelize }
+    ["EnergyBuilding", "ResourceBuilding", "SpecialBuilding"].each do |to_delete|
+      types.delete to_delete
+    end
+    types
   end
   
 end

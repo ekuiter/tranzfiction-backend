@@ -1,4 +1,4 @@
-class HQBuilding < SpecialBuilding
+class HqBuilding < SpecialBuilding
   def title
     "Rathaus"
   end
