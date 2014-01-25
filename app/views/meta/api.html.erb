@@ -15,11 +15,11 @@
 (Nur die untergeordneten Typen können genutzt werden, die fett gedruckten dienen zur Gruppierung.)
 <ul>
 <% @types.each do |supertype, types| %>
-  <li>
+  <li class="spaced">
     <strong><%= supertype %></strong>
     <ul>
       <% types.each do |type| %>
-        <li><%= link_to type, create_building_path(city_id: '*city_id*') + "?building[type]=" + type, class: :ajax %>&nbsp;&nbsp;&nbsp;<sub><em><%= type.constantize.new(level: 1).title %></em></sub></li>
+        <li class="spaced"><%= link_to type, create_building_path(city_id: '*city_id*') + "?building[type]=" + type, class: :ajax %>&nbsp;&nbsp;&nbsp;<sub><em><%= type.constantize.new(level: 1).title %></em></sub></li>
       <% end %>
     </ul>
   </li>
