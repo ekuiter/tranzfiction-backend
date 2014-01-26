@@ -1,77 +1,48 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Building do
-  it "has a valid factory" do
-    create(:building).should be_valid
-  end
-  
-  it "is invalid without a city" do
-    build(:building, city: nil).should_not be_valid
-  end
-  
-  it "is invalid without a level" do
-    build(:building, level: nil).should_not be_valid
-  end
-  
-  it "is invalid without a numeric level" do
-    build(:building, level: "test").should_not be_valid
-  end
-  
-  it "is invalid with a too small level" do
-    build(:building, level: 0).should_not be_valid
-  end
-  
-  it "is invalid without a type" do
-    build(:building, type: nil).should_not be_valid
-  end
-  
-  it "is invalid with an invalid type" do
-    build(:building, type: Faker::Lorem.words).should_not be_valid
-  end
-  
-  it "has a title, description, image, energy consumption and upgrade resources" do
-    building = create(:building)
-    building.title.should_not be_blank
-    building.description.should_not be_blank
-    building.image.should_not be_blank
-    building.energy_consumption.should_not be_blank
-    building.upgrade_resources.should_not be_blank
-  end
+  let(:building) { create(:building) }
+  let(:lvl2_building) { create(:building, level: 2) }
+  it("has a valid factory") { expect(building).to be_valid }
+  it("is invalid without a city") { expect(build(:building, city: nil)).not_to be_valid }
+  it("is invalid without a level") { expect(build(:building, level: nil)).not_to be_valid }
+  it("is invalid without a numeric level") { expect(build(:building, level: "test")).not_to be_valid }
+  it("is invalid with a too small level") { expect(build(:building, level: 0)).not_to be_valid }
+  it("is invalid without a type") { expect(build(:building, type: nil)).not_to be_valid }
+  it("is invalid with an invalid type") { expect(build(:building, type: Faker::Lorem.words)).not_to be_valid }
+  it("has a title") { expect(building.title).not_to be_blank }
+  it("has a description") { expect(building.description).not_to be_blank }
+  it("has a image") { expect(building.image).not_to be_blank }
+  it("has a energy consumption") { expect(building.energy_consumption).not_to be_blank }
+  it("has upgrade resources") { expect(building.upgrade_resources).not_to be_blank }
   
   describe "actions" do
-    before :each do
-      @building = create(:building)
-    end
-    
-    it "can be processed" do
-      @building.process.should == true
-    end
-  
-    it "upgrades" do
-      @building.upgrade.should == @building
-    end
+    it("can be processed") { expect(building.process).to eq true }
+    it("upgrades") { expect(building.upgrade).to eq building }
     
     context "level 1" do
-      it "does not downgrade" do
-        @building.downgrade.should_not == @building
-      end
+      it("does not downgrade") { expect(building.downgrade).not_to eq building }
     end
     
     context "level 2" do
-      before :each do
-        @building = create(:building, level: 2)
-      end
-            
-      it "downgrades" do
-        @building.downgrade.should == @building
-      end
+      it("downgrades") { expect(lvl2_building.downgrade).to eq lvl2_building }
     end
   end
   
-  it "returns all valid building types" do
-    Building.valid_types.each do |type|
-      build(:building, type: type).should be_valid
+  describe "valid types" do
+    it("returns all") { validate_types Building.valid_types }
+    
+    it "returns all as a tree" do
+      Building.valid_types_tree.each do |supertype, types|
+        expect([:EnergyBuilding, :ResourceBuilding, :SpecialBuilding]).to include(supertype)
+        validate_types types
+      end
+    end
+  
+    def validate_types(types)
+      types.each do |type|
+        expect(build(:building, type: type)).to be_valid
+      end
     end
   end
-  
 end

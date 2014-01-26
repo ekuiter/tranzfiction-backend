@@ -86,6 +86,7 @@ class Building < ActiveRecord::Base
     end
   end
   
+  # alle erlaubten Gebäudetypen zurückgeben
   def self.valid_types
     types = []
     Dir.glob(Rails.root.join("app", "models", "buildings", "**", "*.rb").to_s) do |file|
@@ -96,6 +97,15 @@ class Building < ActiveRecord::Base
       types.delete to_delete
     end
     types
+  end
+  
+  # alle erlaubten Gebäudetypen als Baumstruktur zurückgeben
+  def self.valid_types_tree
+    tree = { EnergyBuilding: [], ResourceBuilding: [], SpecialBuilding: [] }
+    self.valid_types.map do |type|
+      tree[type.constantize.superclass.to_s.to_sym].push type
+    end
+    tree
   end
   
 end

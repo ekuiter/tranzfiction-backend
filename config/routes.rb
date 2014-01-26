@@ -34,7 +34,10 @@ Tranzfiction::Application.routes.draw do
   end
   
   # User-Authentifizierung (mit angepassten Login- und Registrierungscontrollern)
-  devise_for :users, controllers: {sessions: "authentication/sessions", registrations: "authentication/registrations"}
+  devise_for :users, controllers: {
+    sessions: "authentication/sessions", 
+    registrations: "authentication/registrations"
+  }
   
   root to: "meta#home"
   get "api", to: "meta#api", as: :api

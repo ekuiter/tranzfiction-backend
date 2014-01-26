@@ -51,6 +51,12 @@ Spork.prefork do
     config.order = "random"
   
     config.include FactoryGirl::Syntax::Methods
+    config.include Devise::TestHelpers, type: :controller
+    config.include ControllerMacros, type: :controller
+    
+    config.expect_with :rspec do |c|
+      c.syntax = :expect
+    end
   end
   
 end

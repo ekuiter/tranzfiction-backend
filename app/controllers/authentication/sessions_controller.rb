@@ -1,9 +1,9 @@
 # JSON/AJAX-Login aktivieren
 class Authentication::SessionsController < Devise::SessionsController
   def new
-      flash[:notice] = session.delete(:registration_flash) if session[:registration_flash]
-      super
-    end
+    flash[:notice] = session.delete(:registration_flash) if session[:registration_flash]
+    super
+  end
   
   def create
     resource = warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failure")

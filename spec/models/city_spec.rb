@@ -1,46 +1,28 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe City do
-  it "has a valid factory" do
-    create(:city).should be_valid
-  end
-  
-  it "is invalid without a user" do
-    build(:city, user: nil).should_not be_valid
-  end
-  
-  it "is invalid without a name" do
-    build(:city, name: nil).should_not be_valid
-  end
-  
-  it "is invalid with a too short name" do
-    build(:city, name: Faker::Lorem.characters(2)).should_not be_valid
-  end
-  
-  it "is invalid with a too long name" do
-    build(:city, name: Faker::Lorem.characters(100)).should_not be_valid
-  end
+  let(:user) { create(:user) }
+  let(:city) { create(:city) }
+  it("has a valid factory") { expect(city).to be_valid }
+  it("is invalid without a user") { expect(build(:city, user: nil)).not_to be_valid }
+  it("is invalid without a name") { expect(build(:city, name: nil)).not_to be_valid }
+  it("is invalid with a too short name") { expect(build(:city, name: Faker::Lorem.characters(2))).not_to be_valid }
+  it("is invalid with a too long name") { expect(build(:city, name: Faker::Lorem.characters(100))).not_to be_valid }
+  it("has a numeric build speed") { expect(city.build_speed).to be_kind_of Numeric }
   
   it "is invalid with an already taken name" do
-    user = create(:user)
     create(:city, user: user, name: "Teststadt")
-    build(:city, user: user, name: "Teststadt").should_not be_valid
+    expect(build(:city, user: user, name: "Teststadt")).not_to be_valid
   end
   
   it "is invalid if it exceeds the city limit" do
-    user = create(:user)
     user.city_limit.times { create(:city, user: user) }
-    build(:city, user: user).should_not be_valid
+    expect(build(:city, user: user)).not_to be_valid
   end
   
   it "resets by deleting all of its buildings" do
-    city = create(:city)
     5.times { create(:building, city: city) }
     city.reset
-    city.buildings.should be_blank
-  end
-
-  it "has a build speed" do
-    create(:city).build_speed.should be_kind_of(Numeric)
+    expect(city.buildings).to be_blank
   end
 end

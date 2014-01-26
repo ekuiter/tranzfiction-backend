@@ -5,7 +5,8 @@ class BuildingController < ApplicationController
   before_filter :admin, only: [:downgrade]
   
   def index
-    render json: @city.buildings
+    @buildings = @city.buildings
+    render json: @buildings
   end
   
   def create
@@ -13,7 +14,7 @@ class BuildingController < ApplicationController
     if @building.save
       render json: @building
     else
-      render json: @building.errors
+      render json: @building.errors, status: 400
     end
   end
   
@@ -23,7 +24,7 @@ class BuildingController < ApplicationController
   
   def destroy
     @building.destroy
-    render json: "Gebäude gelöscht"
+    render json: @building
   end
   
   def upgrade

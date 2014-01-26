@@ -9,11 +9,11 @@ class ApplicationController < ActionController::Base
     begin
       yield
     rescue ActiveRecord::RecordNotFound => e
-      render json: "Diese ID existiert nicht"
+      render json: "Diese ID existiert nicht", status: 404
     end
   end
   
   def admin
-    render json: "Keine Berechtigung!" unless current_user.try(:admin?)
+    render json: "Keine Berechtigung!", status: 401 unless current_user.try(:admin?)
   end
 end

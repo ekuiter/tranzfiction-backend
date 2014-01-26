@@ -4,7 +4,8 @@ class CityController < ApplicationController
   before_filter :admin, only: [:reset]
   
   def index
-    render json: current_user.cities
+    @cities = current_user.cities
+    render json: @cities
   end
   
   def create
@@ -12,7 +13,7 @@ class CityController < ApplicationController
     if @city.save
       render json: @city
     else
-      render json: @city.errors
+      render json: @city.errors, status: 400
     end
   end
   
@@ -22,7 +23,7 @@ class CityController < ApplicationController
   
   def destroy
     @city.destroy
-    render json: "Stadt gelöscht"
+    render json: @city
   end
   
   def reset
