@@ -7,7 +7,7 @@ describe City do
   it("is invalid without a user") { expect(build(:city, user: nil)).not_to be_valid }
   it("is invalid without a name") { expect(build(:city, name: nil)).not_to be_valid }
   it("is invalid with a too short name") { expect(build(:city, name: Faker::Lorem.characters(2))).not_to be_valid }
-  it("is invalid with a too long name") { expect(build(:city, name: Faker::Lorem.characters(100))).not_to be_valid }
+  it("is invalid with a too long name") { expect(build(:city, name: Faker::Lorem.characters(51))).not_to be_valid }
   it("has a numeric build speed") { expect(city.build_speed).to be_kind_of Numeric }
   
   it "is invalid with an already taken name" do

@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
    # eine City hat viele Buildings, ein User hat viele Cities => ein User hat viele Buildings (Polymorphie)
   has_many :buildings, through: :cities
          
+  validates :planet, presence: true, length: { minimum: 3, maximum: 50 }
+        
   # sorgt dafür, dass der letzte Administrator nicht gelöscht werden kann
   validate :validate_last_admin
   before_destroy :preserve_last_admin

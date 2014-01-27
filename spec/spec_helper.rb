@@ -14,10 +14,6 @@ Spork.prefork do
   require 'rspec/autorun'
   require "capybara/rspec"
 
-  # Requires supporting ruby files with custom matchers and macros, etc,
-  # in spec/support/ and its subdirectories.
-  Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
-
   # Checks for pending migrations before tests are run.
   # If you are not using ActiveRecord, you can remove this line.
   ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
@@ -52,7 +48,6 @@ Spork.prefork do
   
     config.include FactoryGirl::Syntax::Methods
     config.include Devise::TestHelpers, type: :controller
-    config.include ControllerMacros, type: :controller
     
     config.expect_with :rspec do |c|
       c.syntax = :expect
@@ -62,5 +57,11 @@ Spork.prefork do
 end
 
 Spork.each_run do
-  # This code will be run each time you run your specs.
+  # Requires supporting ruby files with custom matchers and macros, etc,
+  # in spec/support/ and its subdirectories.
+  Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+  RSpec.configure do |config|
+    config.include ControllerMacros, type: :controller
+    config.extend Actions, type: :controller
+  end
 end

@@ -9,8 +9,11 @@ describe User do
   it("is invalid without a well-formatted email") { expect(build(:user, email: Faker::Lorem.words)).not_to be_valid }
   it("is invalid without a password") { expect(build(:user, password: nil)).not_to be_valid }
   it("is invalid with a too short password") { expect(build(:user, password: Faker::Lorem.characters(7))).not_to be_valid }
-  it("is invalid with a too long password") { expect(build(:user, password: Faker::Lorem.characters(200))).not_to be_valid }
+  it("is invalid with a too long password") { expect(build(:user, password: Faker::Lorem.characters(129))).not_to be_valid }
   it("has a numeric city limit") { expect(user.city_limit).to be_kind_of Numeric }
+  it("is invalid without a planet") { expect(build(:user, planet: nil)).not_to be_valid }
+  it("is invalid with a too short planet") { expect(build(:user, planet: Faker::Lorem.characters(2))).not_to be_valid }
+  it("is invalid with a too long planet") { expect(build(:user, planet: Faker::Lorem.characters(51))) }
   
   it "is invalid with an already taken email" do
     email = Faker::Internet.email

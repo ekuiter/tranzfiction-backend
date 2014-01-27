@@ -60,6 +60,7 @@
 				<dict>
 					<key>COMMAND_STRING</key>
 					<string>source /Users/ek/.bash_profile
+killall mysqld spork httpd || true
 mysql.server start
 cd /Users/ek/Projekte/tranzfiction-backend/
 spork</string>
@@ -172,12 +173,10 @@ spork</string>
 						<string>4</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>309.500000:554.000000</string>
+				<string>311.500000:554.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/German.lproj/main.nib</string>
 			</dict>

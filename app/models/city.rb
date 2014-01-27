@@ -1,6 +1,7 @@
 class City < ActiveRecord::Base
   belongs_to :user
   has_many :buildings
+  has_one :resources
   
   validates :user, presence: true
   validates :name, presence: true, length: { minimum: 3, maximum: 50 }, uniqueness: { scope: :user_id }

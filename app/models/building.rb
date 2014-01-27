@@ -6,6 +6,10 @@ class Building < ActiveRecord::Base
   validates :type, presence: true
   validate :valid_type
   
+  def cast
+    becomes type.constantize
+  end
+  
   def as_json(methods)
     JSON.parse to_s
   end

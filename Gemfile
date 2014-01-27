@@ -1,5 +1,6 @@
 source 'https://rubygems.org'  # Quelle der Gems
-ruby '2.0.0'                   # aktuelle Ruby-Version
+# aktuelle Ruby-Version
+ruby '2.0.0'
 
 gem 'rails',        '4.0.0'    # Ruby on Rails
 gem 'rails_12factor'           # Anpassungen für Rails 4 auf Heroku
@@ -28,4 +29,5 @@ group :test do                 # nur beim Testen:
   gem 'capybara'               # Nutzereingaben simulieren
   gem 'guard-rspec'            # Tests automatisch ausführen
   gem 'launchy'                # Browser öffnen bei fehlgeschlagenen Tests
+  gem 'fuubar'                 # bessere Anzeige des Testvorgangs
 end
