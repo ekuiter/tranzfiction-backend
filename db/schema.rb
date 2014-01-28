@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140127161651) do
+ActiveRecord::Schema.define(version: 20140128145553) do
 
   create_table "buildings", force: true do |t|
     t.integer  "city_id"
@@ -29,9 +29,9 @@ ActiveRecord::Schema.define(version: 20140127161651) do
   end
 
   create_table "resources", force: true do |t|
-    t.integer  "silicon"
-    t.integer  "plastic"
-    t.integer  "graphite"
+    t.decimal  "silicon",    precision: 12, scale: 6
+    t.decimal  "plastic",    precision: 12, scale: 6
+    t.decimal  "graphite",   precision: 12, scale: 6
     t.integer  "city_id"
     t.datetime "created_at"
     t.datetime "updated_at"

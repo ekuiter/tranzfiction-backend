@@ -41,14 +41,13 @@ describe User do
       end
     end
     
-    it "counts admins" do
+    it "counts admins" do      
       expect(User.admin_count).to eq 0
-      5.times { create(:admin) }
-      expect(User.admin_count).to eq 5
-      2.times { User.last.destroy }
-      expect(User.admin_count).to eq 3
-      User.all[0..1].map { |admin| admin.update_attributes(admin: false) }
-      expect(User.admin_count).to eq 1
+      expect { 5.times { create(:admin) } }.to change { User.admin_count }.by(5)
+      expect { 2.times { User.admins.last.destroy } }.to change { User.admin_count }.by(-2)
+      expect do
+        User.admins[0..1].map { |admin| admin.update_attributes(admin: false) }
+      end.to change { User.admin_count }.by(-2)
     end
   end
 end

@@ -6,6 +6,8 @@ class City < ActiveRecord::Base
   validates :user, presence: true
   validates :name, presence: true, length: { minimum: 3, maximum: 50 }, uniqueness: { scope: :user_id }
   validate :city_limit
+  
+  before_create :create_resources
 
   def as_json(methods)
     JSON.parse to_s
@@ -13,7 +15,7 @@ class City < ActiveRecord::Base
   
   def to_s
     Jbuilder.new do |json|
-      json.(self, :id, :name, :build_speed)
+      json.(self, :id, :name, :build_speed, :resources)
     end.target!
   end
   
@@ -30,6 +32,10 @@ class City < ActiveRecord::Base
   end
   
   private
+  
+  def create_resources
+    assign_attributes resources: Resources.create(silicon: 0, plastic: 0, graphite: 0)
+  end
   
   def city_limit
     return unless user

@@ -9,6 +9,7 @@ describe City do
   it("is invalid with a too short name") { expect(build(:city, name: Faker::Lorem.characters(2))).not_to be_valid }
   it("is invalid with a too long name") { expect(build(:city, name: Faker::Lorem.characters(51))).not_to be_valid }
   it("has a numeric build speed") { expect(city.build_speed).to be_kind_of Numeric }
+  it("has resources") { expect(city.resources).to be_kind_of Resources }
   
   it "is invalid with an already taken name" do
     create(:city, user: user, name: "Teststadt")

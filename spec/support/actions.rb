@@ -47,7 +47,7 @@ module Actions
         end
       elsif hash[:json]
         it "renders @#{hash[:json].to_sym} as JSON" do
-          expect(response.body).to be_json(send(block ? instance_eval(&block) : hash[:json].to_sym))
+          expect(response.body).to be_json(block ? instance_eval(&block) : send(hash[:json].to_sym))
         end
       end
     elsif hash == :json

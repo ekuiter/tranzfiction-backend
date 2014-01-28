@@ -9,5 +9,9 @@ FactoryGirl.define do
     factory :invalid_building do
       type { Faker::Lorem.words }
     end
+    
+    factory :resource_building do
+      type { Building.valid_types_tree[:ResourceBuilding].sample }
+    end
   end
 end

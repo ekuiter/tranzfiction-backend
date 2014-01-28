@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   
   def to_s
     Jbuilder.new do |json|
-      json.(self, :id, :email, :admin)
+      json.(self, :id, :email, :admin, :planet)
     end.target!
   end
   
@@ -44,6 +44,10 @@ class User < ActiveRecord::Base
   
   def preserve_last_admin
     !last_admin? # gibt false zurück, falls dies der letzte Admin war, was den Löschvorgang abbricht
+  end
+  
+  def self.admins
+    where admin: true
   end
   
   def self.admin_count

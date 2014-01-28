@@ -10,7 +10,8 @@ module MetaHelper
   def action_link(action, type)
     send("#{action[0]}_#{type}", id: insert_param(action, :id), 
                              city_id: insert_param(action, :city_id), 
-                             building_id: insert_param(action, :building_id)).html_safe
+                             building_id: insert_param(action, :building_id),
+                             pass: insert_param(action, :pass)).html_safe
   end
   
   def action_dump(actions, klass)

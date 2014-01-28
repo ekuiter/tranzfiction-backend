@@ -17,7 +17,6 @@ describe Building do
   it("has upgrade resources") { expect(building.upgrade_resources).not_to be_blank }
   
   describe "actions" do
-    it("can be processed") { expect(building.process).to eq true }
     it("upgrades") { expect(building.upgrade).to eq building }
     
     context "level 1" do
