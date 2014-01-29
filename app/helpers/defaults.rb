@@ -29,8 +29,12 @@ module Defaults
   
   module Worker
     def self.password
-      config = HashWithIndifferentAccess.new(YAML.load(File.read(Rails.root.join("config", "database.yml"))))
-      config[:worker_password]
+      if Rails.env.production?
+        ENV['WORKER_PASSWORD']
+      else
+        config = HashWithIndifferentAccess.new(YAML.load(File.read(Rails.root.join("config", "database.yml"))))
+        config[:worker_password]
+      end
     end
   end
 end
