@@ -1,0 +1,1 @@
+gource --auto-skip-seconds 0.5 --file-idle-time 0 --time-scale 1 --key --hide dirnames --default-user-image avatar.png -s 2 -o - | ffmpeg -y -r 60 -f image2pipe -vcodec ppm -i - -vcodec libx264 -preset ultrafast -pix_fmt yuv420p -crf 1 -threads 0 -bf 0 $1
