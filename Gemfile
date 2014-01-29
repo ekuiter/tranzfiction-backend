@@ -16,6 +16,7 @@ gem 'devise'                   # Login-/Registrierungs-System
 gem 'bootstrap-sass'           # Twitter Bootstrap für die Benutzeroberfläche
 gem 'rack-cors', :require => 'rack/cors' # AJAX zulassen von (www.)tranzfiction.com auf api.tranzfiction.com
 gem 'rails_layout', group: :development # Bootstrap einrichten
+gem 'bullet', group: :development # überflüssige Datenbankabfragen ermitteln
 gem 'sdoc', require: false, group: :doc # bundle exec rake doc:rails # Dokumentation generieren
 gem 'spork-rails', :github => 'sporkrb/spork-rails' # für schnellere Ausführung der Tests
 

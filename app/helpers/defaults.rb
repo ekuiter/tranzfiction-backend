@@ -28,9 +28,9 @@ module Defaults
   end
   
   module Worker
-    def self.pass
+    def self.password
       config = HashWithIndifferentAccess.new(YAML.load(File.read(Rails.root.join("config", "database.yml"))))
-      config[:worker_pass]
+      config[:worker_password]
     end
   end
 end

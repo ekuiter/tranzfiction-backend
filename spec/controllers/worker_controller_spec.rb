@@ -4,7 +4,7 @@ describe WorkerController do
   context "logged in" do
     describe :gain do
       before { create(:resource_building) }
-      get! { { pass: Defaults::Worker::pass } }.status(200)
+      get! { { password: Defaults::Worker::password } }.status(200)
     end
   end
   

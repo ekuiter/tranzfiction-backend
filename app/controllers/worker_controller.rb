@@ -16,7 +16,7 @@ class WorkerController < ApplicationController
   private
   
   def authenticate_worker
-    if params[:pass] == Defaults::Worker::pass
+    if params[:password] == Defaults::Worker::password
       yield
     else
       render json: "Keine Berechtigung", status: 401
