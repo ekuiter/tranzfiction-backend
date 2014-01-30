@@ -6,11 +6,9 @@ class ApplicationController < ActionController::Base
   private
   
   def catch
-    begin
-      yield
-    rescue ActiveRecord::RecordNotFound => e
-      render json: "Diese ID existiert nicht", status: 404
-    end
+    yield
+  rescue ActiveRecord::RecordNotFound => e
+    render json: "Diese ID existiert nicht", status: 404
   end
   
   def admin

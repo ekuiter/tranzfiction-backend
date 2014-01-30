@@ -11,7 +11,7 @@ module MetaHelper
     send("#{action[0]}_#{type}", id: insert_param(action, :id), 
                              city_id: insert_param(action, :city_id), 
                              building_id: insert_param(action, :building_id),
-                             pass: insert_param(action, :pass)).html_safe
+                             password: insert_param(action, :password)).html_safe
   end
   
   def action_dump(actions, klass)
