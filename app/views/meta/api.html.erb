@@ -37,5 +37,6 @@
 <p><%= link_to gain_link, gain_link, class: :ajax %></p>
 <p>Jedes Mal, wenn /gain ausgeführt wird, werden allen Städten von allen Benutzern neue Ressourcen angerechnet. Die Berechnung der Ressoucen berücksichtigt, wann /gain das letzte Mal aufgerufen wurde. Es ist also egal, ob /gain alle 5 Minuten oder alle 5 Sekunden ausgeführt wird - die Ressourcenberechnung passt sich entsprechend an.</p>
 <p>Die Ausgabe von /gain enthält das Feld <em>since_last_gain</em>. Dieses gibt an, wie viele Sekunden seit dem letzten /gain verstrichen sind. Auf Basis dieses Wertes werden dann die neu gewonnenen Ressourcen berechnet. Diese werden als <em>gained_resources</em> für jede Stadt einzeln aufgeführt. (Dies kann zum Debugging genutzt werden.)</p>
+<p>Zuletzt wurde /gain vor <strong><%= Configuration.since_last_gain.round %> Sekunden</strong> aufgerufen.</p>
 </div>
 <% end %>
