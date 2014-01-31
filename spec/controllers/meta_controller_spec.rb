@@ -3,7 +3,7 @@ require "spec_helper"
 describe MetaController do  
   let(:cities) { user.cities }
   
-  login [:user, :admin] do
+  login :user, :admin do
     describe :home do
       get!.assigns(:cities).renders(template: :home)
     end

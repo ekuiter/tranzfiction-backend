@@ -12,8 +12,8 @@ describe CityController do
   let(:city_attributes) { attributes_for(:city) }
   let(:invalid_city_attributes) { attributes_for(:invalid_city) }
   
-  login [:user, :admin] do
-    describe_actions [:show, :destroy] do |action|
+  login :user, :admin do
+    describe_actions :show, :destroy do |action|
       context "with parameters" do
         get!(action) { { id: city.id } }.assigns(:city).renders(json: :city)
       end
@@ -60,7 +60,7 @@ describe CityController do
   end
   
   no_login do
-    describe_actions [:index, :show, :destroy, :reset, :create] do |action|
+    describe_actions :index, :show, :destroy, :reset, :create do |action|
       status_without_params! 302
     end
   end
