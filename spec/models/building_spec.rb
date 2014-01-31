@@ -10,9 +10,6 @@ describe Building do
   it("is invalid with a too small level") { expect(build(:building, level: 0)).not_to be_valid }
   it("is invalid without a type") { expect(build(:building, type: nil)).not_to be_valid }
   it("is invalid with an invalid type") { expect(build(:building, type: Faker::Lorem.words)).not_to be_valid }
-  it("has a title") { expect(building.title).not_to be_blank }
-  it("has a description") { expect(building.description).not_to be_blank }
-  it("has a image") { expect(building.image).not_to be_blank }
   it("has a energy consumption") { expect(building.energy_consumption).not_to be_blank }
   it("has upgrade resources") { expect(building.upgrade_resources).not_to be_blank }
   

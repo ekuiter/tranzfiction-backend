@@ -16,7 +16,7 @@ class Building < ActiveRecord::Base
   
   def to_s
     Jbuilder.new do |json|
-      json.(self, :id, :level, :type, :title, :description, :image, :energy_consumption, :upgrade_resources)
+      json.(self, :id, :level, :type, :energy_consumption, :upgrade_resources)
     end.target!
   end
   
@@ -46,18 +46,6 @@ class Building < ActiveRecord::Base
   end
   
   public
-  
-  def title
-    stub "Titel fehlt"
-  end
-  
-  def description
-    stub "Beschreibung fehlt"
-  end
-  
-  def image
-    stub "Bild fehlt"
-  end
   
   def energy_consumption
     stub "Energieverbrauch fehlt"
