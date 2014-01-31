@@ -23,4 +23,8 @@ Dieses Repository soll dabei helfen, den tranzfiction-Programmcode anzusehen und
 
 Zugleich stellt das Repository aber auch den eigentlichen Programmcode dar, sodass man auch einen eigenen tranzfiction-Server aufsetzen kann. Dafür gebe ich allerdings keinen Support und auch keine Anleitung.
 
+(Kleiner Hinweis: Damit das Spiel richtig funktioniert, muss ein Cronjob eingerichtet werden, der regelmäßig diese API-Funktion aufruft: `http://dein-server.de/gain/<passwort>`. Das hier eingesetzte Passwort muss per `heroku config:set WORKER_PASSWORD=<passwort>` gesetzt werden.)
+  
+(Und noch ein Hinweis: Das Spiel ist für den Produktivbetrieb mit Heroku geschrieben. Andere Plattformen sind wahrscheinlich möglich, allerdings nicht ohne den Code anzupassen.)
+
 *Rechtliches:* Da tranzfiction vor allem ein Beispiel ("showcase") einer Rails-Applikation für meine Facharbeit sein soll, ist das Projekt nicht Open Source. Der Code darf gelesen und auch für einen Testserver, nicht aber einen öffentlich zugänglichen Server genutzt werden. Veränderungen am Code in geringem Maße sind erlaubt (Konfiguration etc.), aber keine größeren Änderungen an der Architektur, API oder den Features. Das Projekt darf nicht kommerziell genutzt werden.
