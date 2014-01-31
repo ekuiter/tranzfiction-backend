@@ -5,7 +5,7 @@ class CityController < ApplicationController
   
   def index
     @cities = current_user.cities
-    render json: @cities
+    render json: @cities.includes(:resources)
   end
   
   def create
