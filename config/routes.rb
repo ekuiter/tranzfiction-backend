@@ -18,7 +18,7 @@ module Actions
       downgrade_building: { path: "city/:city_id/building/:building_id/downgrade", to: "building#downgrade", desc: "Verringert das Level des Gebäudes *building_id* in der Stadt *city_id* um 1. (Admin-only)" },
       
       # Worker
-      gain:               { path: "gain/:password",       to: "worker#gain",  desc: "Wird automatisch alle #{Defaults::Building::gain_interval} Sekunden aufgerufen, um Rohstoffe abzubauen." }
+      gain:               { path: "gain/:password",       to: "worker#gain",  desc: "Wird automatisch in einem festen Intervall aufgerufen, um Rohstoffe abzubauen. (Admin-only)" }
     }
   end
 end

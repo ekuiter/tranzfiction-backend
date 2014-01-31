@@ -24,3 +24,18 @@
   </li>
 <% end %>
 </ul>
+
+<% if current_user.admin? %>
+<div class="admin-only">
+<h3>Informationen NUR für Administratoren</h3>
+<h4>Passwort für /gain</h4>
+<p>Das Passwort zum Aufruf der /gain-Funktion lautet:</p>
+<p><em><%= Defaults::Worker::password %></em></p>
+<p><strong>WICHTIG</strong>: Das Passwort darf nicht weitergegeben werden, denn jeder, der es besitzt, kann /gain ausführen. Manipulationen sind dadurch zwar nicht möglich, durch ständigen Aufruf von /gain kann der Server jedoch sehr einfach lahmgelegt werden.</p>
+<p>Um die Funktion direkt aufzurufen, bewege die Maus über diesen Link:</p>
+<% gain_link = gain_path(password: Defaults::Worker::password) %>
+<p><%= link_to gain_link, gain_link, class: :ajax %></p>
+<p>Jedes Mal, wenn /gain ausgeführt wird, werden allen Städten von allen Benutzern neue Ressourcen angerechnet. Die Berechnung der Ressoucen berücksichtigt, wann /gain das letzte Mal aufgerufen wurde. Es ist also egal, ob /gain alle 5 Minuten oder alle 5 Sekunden ausgeführt wird - die Ressourcenberechnung passt sich entsprechend an.</p>
+<p>Die Ausgabe von /gain enthält das Feld <em>since_last_gain</em>. Dieses gibt an, wie viele Sekunden seit dem letzten /gain verstrichen sind. Auf Basis dieses Wertes werden dann die neu gewonnenen Ressourcen berechnet. Diese werden als <em>gained_resources</em> für jede Stadt einzeln aufgeführt. (Dies kann zum Debugging genutzt werden.)</p>
+</div>
+<% end %>
