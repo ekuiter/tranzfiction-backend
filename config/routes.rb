@@ -1,12 +1,6 @@
-module Actions
-  def self.frontend_actions 
-    {
-      new_city: { path: "city/new", desc: "Erstellt eine neue Stadt." },
-    }
-  end
-  
+module Actions  
   # Die Beschreibung der API. Wirkt sich direkt auf die verfügbaren Routen aus und wird im Backend zur Dokumentation der API genutzt.
-  def self.backend_actions
+  def self.api
     {
       user:               { path: "user",             to: "meta#user",    desc: "Zeigt Informationen zum aktuell eingeloggten Benutzer an." },
       cities:             { path: "city",             to: "city#index",   desc: "Zeigt alle deine Städte an." },
@@ -49,11 +43,7 @@ Tranzfiction::Application.routes.draw do
     resources :users
   end
   
-  Actions::frontend_actions.each do |name, action|
-    get action[:path], to: redirect(Defaults::Routes::frontend_url + action[:path]), as: name
-  end
-  
-  Actions::backend_actions.each do |name, action|
+  Actions::api.each do |name, action|
     get action[:path], to: action[:to], as: name
   end
   

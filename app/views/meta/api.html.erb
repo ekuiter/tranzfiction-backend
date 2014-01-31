@@ -5,11 +5,8 @@
 <p><%= link_to create_city_url + "?city[name]=", create_city_path + "?city[name]=", class: :ajax %><strong>*Name der Stadt*</strong></p>
 <p>Falls der Aufruf fehlerhaft ist, werden entsprechende Hinweise gegeben.</p>
 
-<h4>API-Übersicht (Backend)</h4>
-<%= action_dump(Actions::backend_actions, :ajax).html_safe %>
-
-<h4>Frontend-Aktionen</h4>
-<%= action_dump(Actions::frontend_actions, nil).html_safe %>
+<h4>API-Übersicht</h4>
+<%= action_dump(Actions::api, :ajax).html_safe %>
 
 <h4>Mögliche Gebäudetypen</h4>
 (Nur die untergeordneten Typen können genutzt werden, die fett gedruckten dienen zur Gruppierung.)
