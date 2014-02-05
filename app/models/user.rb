@@ -30,14 +30,14 @@ class User < ActiveRecord::Base
   
   def last_admin?
     # wenn dieser Benutzer ein Admin war und nur ein Admin vorhanden war
-    admin_was == true && self.class.admin_count == 1 ? true : false
+    admin_was and self.class.admin_count == 1 ? true : false
   end
   
   private
   
   def validate_last_admin
     # wenn dies jetzt kein Admin mehr sein soll, aber der letze Admin war
-    if admin == false && last_admin?
+    if not admin and last_admin?
       errors.add(:base, "Der letzte Admin kann nicht gelöscht werden")
     end
   end

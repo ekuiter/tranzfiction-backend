@@ -28,7 +28,7 @@
     </tbody>
   </table>  
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+  <% if devise_mapping.confirmable? and resource.pending_reconfirmation? %>
     <div>Muss noch bestätigt werden: <%= resource.unconfirmed_email %></div>
   <% end %>
 

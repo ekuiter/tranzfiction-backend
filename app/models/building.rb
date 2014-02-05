@@ -24,7 +24,7 @@ class Building < ActiveRecord::Base
     begin
       # damit der Gebäudetyp korrekt ist, muss das Gebäude von Building abgeleitet sein (<),
       # darf aber (wie Resource-, Energy- oder SpecialBuilding) keine direkte Kindklasse sein (superclass !=).
-      valid = type.constantize < Building && type.constantize.superclass != Building
+      valid = type.constantize < Building and type.constantize.superclass != Building
     rescue
       valid = false
     end
@@ -39,11 +39,29 @@ class Building < ActiveRecord::Base
     Resources.new silicon: 50, plastic: 50, graphite: 50
   end
   
+  def upgrade_time
+    60
+  end
+  
+  def ready?
+    return false unless ready_at
+    ready_at.past?
+  end
+  
+  def ready_in
+    if ready? and not ready_at.nil?
+      ready_at - Time.now
+    else
+      0
+    end
+  end
+  
   def consume_resources
     resources = city.resources
     if resources >= upgrade_resources
       yield if block_given?
       if valid?
+        ready_at = Time.now
         resources.subtract(upgrade_resources).save
         return true
       end

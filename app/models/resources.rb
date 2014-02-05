@@ -74,17 +74,17 @@ class Resources < ActiveRecord::Base
   
   def equals(resources)
     raise ArgumentError unless resources.is_a? Resources
-    silicon == resources.silicon && plastic == resources.plastic && graphite == resources.graphite
+    silicon == resources.silicon and plastic == resources.plastic and graphite == resources.graphite
   end
   
   def greater_than(resources)
     raise ArgumentError unless resources.is_a? Resources
-    silicon > resources.silicon && plastic > resources.plastic && graphite > resources.graphite
+    silicon > resources.silicon and plastic > resources.plastic and graphite > resources.graphite
   end
   
   def greater_than_or_equals(resources)
     raise ArgumentError unless resources.is_a? Resources
-    silicon >= resources.silicon && plastic >= resources.plastic && graphite >= resources.graphite
+    silicon >= resources.silicon and plastic >= resources.plastic and graphite >= resources.graphite
   end
   
   def less_than(resources)
