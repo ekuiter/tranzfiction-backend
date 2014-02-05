@@ -10,8 +10,8 @@ class BuildingController < ApplicationController
   end
   
   def create
-    @building = @city.buildings.new(building_params.merge(level: 1))
-    if @building.save
+    @building, success = Building.build(@city, building_params)
+    if success
       render json: @building
     else
       render json: @building.errors, status: 400
@@ -28,11 +28,11 @@ class BuildingController < ApplicationController
   end
   
   def upgrade
-    render json: @building.upgrade
+    render json: @building.upgrade!
   end
   
   def downgrade
-    render json: @building.downgrade
+    render json: @building.downgrade!
   end
   
   private

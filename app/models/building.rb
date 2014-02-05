@@ -31,45 +31,45 @@ class Building < ActiveRecord::Base
     errors.add(:type, "ungültig") unless valid
   end
   
-  private
-  
-  # Unendlichkeit (wird für die einzelnen Gebäudetypen benötigt)
-  def infinity
-    +1.0 / 0.0 # Wert der positiven Unendlichkeit in Ruby
-  end
-  
-  # diese Funktionen sind für jeden Gebäudetyp spezifisch,
-  # hier geben sie als Platzhalter Fehlermeldungen zurück
-  
-  def stub message
-    "#{self.class.to_s}: #{message}"
-  end
-  
-  public
-  
   def energy_consumption
     stub "Energieverbrauch fehlt"
   end
   
   def upgrade_resources
-    stub "Ressourcenverbrauch fehlt"
+    Resources.new silicon: 50, plastic: 50, graphite: 50
   end
   
-  def process
-    raise stub("process() undefiniert")
+  def consume_resources
+    resources = city.resources
+    if resources >= upgrade_resources
+      yield if block_given?
+      if valid?
+        resources.subtract(upgrade_resources).save
+        return true
+      end
+    else
+      errors.add :missing_resources, upgrade_resources.subtract_to_zero(resources)
+    end
+    false
+  end
+  
+  def self.build(city, params)
+    building = city.buildings.new(params.merge(level: 1))
+    return building, false unless building.valid?
+    return building, if building.consume_resources then building.save else false end
   end
   
   # diese Funktionen sind unabhängig vom Gebäudetyp
-  def upgrade
-    write_attribute :level, level + 1
-    if save
+  def upgrade!
+    if consume_resources { write_attribute :level, level + 1 }
+      save
       self
     else
       errors
     end
   end
   
-  def downgrade
+  def downgrade!
     write_attribute :level, level - 1
     if save
       self
@@ -98,6 +98,20 @@ class Building < ActiveRecord::Base
       tree[type.constantize.superclass.to_s.to_sym].push type
     end
     tree
+  end
+  
+  private
+  
+  # Unendlichkeit (wird für die einzelnen Gebäudetypen benötigt)
+  def infinity
+    +1.0 / 0.0 # Wert der positiven Unendlichkeit in Ruby
+  end
+  
+  # diese Funktionen sind für jeden Gebäudetyp spezifisch,
+  # hier geben sie als Platzhalter Fehlermeldungen zurück
+  
+  def stub message
+    "#{self.class.to_s}: #{message}"
   end
   
 end

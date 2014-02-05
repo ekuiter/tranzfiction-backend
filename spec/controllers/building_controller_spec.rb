@@ -28,8 +28,23 @@ describe BuildingController do
     describe :create do
       context "with city" do
         context "with valid attributes" do
-          get!(:create) { { city_id: city.id, building: building_attributes } }.renders(:json)
-          it("saves @building") { expect(assigns(:building)).not_to be_new_record }
+          context "with resources" do
+            before do
+              city.resources = create(:resources)
+              get :create, city_id: city.id, building: building_attributes
+            end
+            it("saves @building") { expect(assigns(:building)).not_to be_new_record }
+            renders(:json)
+          end
+          
+          context "without resources" do
+            before do
+              city.resources.empty!
+              get :create, city_id: city.id, building: building_attributes
+            end
+            it("does not save @building") { expect(assigns(:building)).to be_new_record }
+            renders(:json)
+          end
         end
   
         context "with invalid attributes" do
@@ -46,12 +61,26 @@ describe BuildingController do
         destroys { { city_id: city.id, building_id: building.id, collection: city.buildings } }
       end
     end
-    
+ 
     describe :upgrade do      
       context "with city and building" do
-        get!(:upgrade) { { city_id: city.id, building_id: building.id } }
-        assigns(:city, :building).renders(:json) { building.reload }
-        it("upgrades @building") { expect(building.reload.level).to eq 2 }
+        context "with resources" do
+          before do
+            city.resources = create(:resources)
+            get :upgrade, city_id: city.id, building_id: building.id
+          end
+          assigns(:city, :building).renders(:json) { building.reload }
+          it("upgrades @building") { expect(building.reload.level).to eq 2 }
+        end
+        
+        context "without resources" do
+          before do
+            city.resources.empty!
+            get :upgrade, city_id: city.id, building_id: building.id
+          end
+          assigns(:city, :building).renders(:json)
+          it("upgrades @building") { expect(building.reload.level).to eq 1 }
+        end
       end
     end
   end

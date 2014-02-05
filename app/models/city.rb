@@ -34,7 +34,7 @@ class City < ActiveRecord::Base
   private
   
   def create_resources
-    assign_attributes resources: Resources.create(silicon: 0, plastic: 0, graphite: 0)
+    assign_attributes resources: Resources.create unless resources
   end
   
   def city_limit

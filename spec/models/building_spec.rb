@@ -13,15 +13,54 @@ describe Building do
   it("has a energy consumption") { expect(building.energy_consumption).not_to be_blank }
   it("has upgrade resources") { expect(building.upgrade_resources).not_to be_blank }
   
-  describe "actions" do
-    it("upgrades") { expect(building.upgrade).to eq building }
+  describe "build" do
+    let(:city) { create(:city) }
+    let(:success) { Building.build(city, attributes_for(:building_type).merge(level: 1)).last }
     
-    context "level 1" do
-      it("does not downgrade") { expect(building.downgrade).not_to eq building }
+    context "with resources" do
+      it "builds" do
+        expect(success).to be_true
+      end
     end
     
-    context "level 2" do
-      it("downgrades") { expect(lvl2_building.downgrade).to eq lvl2_building }
+    context "without resources" do
+      it "does not build" do
+        city.resources.empty!
+        expect(success).to be_false
+      end
+    end
+  end
+  
+  describe "actions" do
+    describe "upgrade" do  
+      context "with resources" do
+        it "upgrades" do
+          building.city.resources = create(:resources)
+          expect { building.upgrade! }.to change { building.level }.by(1)
+          old_resources = building.city.resources
+          new_resources = old_resources - building.upgrade_resources
+          building.upgrade!
+          expect(building.city.resources).to eq new_resources
+        end
+      end
+      
+      context "without resources" do
+        it "does not upgrade" do
+          building.city.resources.empty!
+          expect { building.upgrade! }.not_to change { building.level }.by(1)
+          expect(building.errors.messages[:missing_resources].first).to eq building.upgrade_resources.subtract_to_zero(building.city.resources)
+        end
+      end
+    end
+      
+    describe "downgrade" do
+      context "level 1" do
+        it("does not downgrade") { expect(building.downgrade!).not_to eq building }
+      end
+    
+      context "level 2" do
+        it("downgrades") { expect(lvl2_building.downgrade!).to eq lvl2_building }
+      end
     end
   end
   

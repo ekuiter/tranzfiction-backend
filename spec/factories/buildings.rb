@@ -14,4 +14,8 @@ FactoryGirl.define do
       type { Building.valid_types_tree[:ResourceBuilding].sample }
     end
   end
+  
+  factory :building_type, class: Building do
+    type { Building.valid_types.sample }
+  end
 end
