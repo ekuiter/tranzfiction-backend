@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>E-Mail</th>
+      <th>Planet</th>
       <th>Admin</th>
       <th>Logins</th>
       <th>Aktueller Login</th>
@@ -15,6 +16,7 @@
     <% @users.each do |user| %>
     <tr>
       <td><%= user.email %></td>
+      <td><%= user.planet %></td>
       <td><%= user.admin? ? "Ja" : "Nein" %></td>
       <td><%= user.sign_in_count %></td>
       <td><%= user.current_sign_in_at? ? user.current_sign_in_at.strftime("%d.%m.%Y %H:%M Uhr") : "Nie" %></td>

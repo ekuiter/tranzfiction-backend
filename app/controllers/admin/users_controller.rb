@@ -46,8 +46,8 @@ class Admin::UsersController < AdminController
   end
 
   def user_params
-    p = params[:user].permit(:email, :password, :password_confirmation, :admin)
-    p = params[:user].permit(:email, :admin) if p[:password].empty? && p[:password_confirmation].empty?
+    p = params[:user].permit(:email, :password, :password_confirmation, :admin, :planet)
+    p = params[:user].permit(:email, :admin, :planet) if p[:password].empty? and p[:password_confirmation].empty?
     p
   end
 end
