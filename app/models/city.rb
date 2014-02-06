@@ -31,10 +31,16 @@ class City < ActiveRecord::Base
     Defaults::City::build_speed
   end
   
+  def ready_buildings
+    buildings.map.select do |building|
+      building.ready?
+    end
+  end
+  
   private
   
   def create_resources
-    assign_attributes resources: Resources.create unless resources
+    assign_attributes resources: Resources.create(silicon: 200, plastic: 200, graphite: 200) unless resources
   end
   
   def city_limit

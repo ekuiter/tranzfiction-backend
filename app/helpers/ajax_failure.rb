@@ -2,7 +2,7 @@ class AjaxFailure < Devise::FailureApp
 
   def respond
     # if AJAX request and account unconfirmed
-    if request.xhr? && warden_message == :unconfirmed
+    if request.xhr? and warden_message == :unconfirmed
     else
       if http_auth?
           http_auth

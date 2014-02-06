@@ -9,7 +9,7 @@ class WorkerController < ApplicationController
     City.includes([:buildings, :resources]).each do |city|
       new_resources = city.resources
       old_resources = new_resources.dup
-      city.buildings.each do |building|
+      city.ready_buildings.each do |building|
         if building.respond_to? :gain
           new_resources = building.gain(new_resources, @since_last_gain)
         end

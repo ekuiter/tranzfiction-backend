@@ -80,4 +80,17 @@ describe Building do
       end
     end
   end
+  
+  describe "ready" do
+    context "new building" do
+      it("is not ready") { expect(building.ready?).to be_false }
+      it("is ready_in") { expect(building.ready_in).to be_close building.upgrade_time, 1 }
+    end
+    
+    context "built building" do
+      before { building.ready_at = Time.now }
+      it("is ready") { expect(building.ready?).to be_true }
+      it("is not ready_in") { expect(building.ready_in).to eq 0 }
+    end
+  end
 end

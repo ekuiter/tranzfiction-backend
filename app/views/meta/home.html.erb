@@ -12,10 +12,31 @@
 <% else %>
 <ul>
   <% @cities.each do |city| %>
-  <li><%= link_to city.name, city, class: [:big, :ajax] %> <sub><%= city.resources.to_json %></sub>
+  <li><%= link_to city.name, city, class: [:big, :ajax] %>
+    <sub>
+      <%= city.resources.to_json %>
+      | <%= link_to "Abreißen", destroy_city_path(id: city.id), target: :_blank, confirm: "Sicher?" %>
+      <% if current_user.admin? %>
+        | <%= link_to "Leeren", reset_city_path(id: city.id), target: :_blank, confirm: "Sicher?" %>
+        <% end %>
+    </sub>
     <ul>
       <% city.buildings.each do |building| %>
-      <li><%= link_to building.type, building_path(city_id: city.id, building_id: building.id), class: [:big, :ajax] %> (Lvl. <%= building.level %>)</li>
+      <li>
+        <%= link_to building.type, building_path(city_id: city.id, building_id: building.id), class: [:big, :ajax] %>
+        (Lvl. <%= building.level %>)
+        <sub>
+          <% if building.ready? %>
+            <%= link_to "Upgrade", upgrade_building_path(city_id: city.id, building_id: building.id), target: :_blank %>
+          <% else %>
+            <span>Fertig in <strong><span class="count"><%= building.ready_in.round %></span>s</strong></span>
+          <% end %>
+          | <%= link_to "Abreißen", destroy_building_path(city_id: city.id, building_id: building.id), target: :_blank, confirm: "Sicher?" %>
+          <% if current_user.admin? %>
+            | <%= link_to "Downgrade", downgrade_building_path(city_id: city.id, building_id: building.id), target: :_blank %>
+          <% end %>
+        </sub>
+      </li>
       <% end %>
     </ul>
   </li>

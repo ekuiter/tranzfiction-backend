@@ -9,7 +9,7 @@ describe City do
   it("is invalid with a too short name") { expect(build(:city, name: Faker::Lorem.characters(2))).not_to be_valid }
   it("is invalid with a too long name") { expect(build(:city, name: Faker::Lorem.characters(51))).not_to be_valid }
   it("has a numeric build speed") { expect(city.build_speed).to be_kind_of Numeric }
-  it("has resources") { expect(city.resources).to be_kind_of Resources }
+  it("has starter resources") { expect(city.resources).to be > Resources.new(silicon: 0, plastic: 0, graphite: 0) }
   
   it "is invalid with an already taken name" do
     create(:city, user: user, name: "Teststadt")
@@ -21,9 +21,18 @@ describe City do
     expect(build(:city, user: user)).not_to be_valid
   end
   
-  it "resets by deleting all of its buildings" do
-    5.times { create(:building, city: city) }
-    city.reset
-    expect(city.buildings).to be_blank
+  describe "buildings" do
+    before { 5.times { create(:building, city: city) } }
+    
+    it "resets by deleting all of its buildings" do
+      city.reset
+      expect(city.buildings).to be_blank
+    end
+  
+    it "returns ready buildings" do
+      city.ready_buildings.each do |building|
+        expect(building.ready?).to be_true
+      end
+    end
   end
 end

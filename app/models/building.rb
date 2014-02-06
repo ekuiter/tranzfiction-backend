@@ -6,6 +6,8 @@ class Building < ActiveRecord::Base
   validates :type, presence: true
   validate :valid_type
   
+  before_create :set_ready_at
+  
   def cast
     becomes type.constantize
   end
@@ -16,7 +18,7 @@ class Building < ActiveRecord::Base
   
   def to_s
     Jbuilder.new do |json|
-      json.(self, :id, :level, :type, :energy_consumption, :upgrade_resources)
+      json.(self, :id, :level, :type, :energy_consumption, :upgrade_resources, :ready_in)
     end.target!
   end
   
@@ -40,7 +42,7 @@ class Building < ActiveRecord::Base
   end
   
   def upgrade_time
-    60
+    180
   end
   
   def ready?
@@ -49,22 +51,32 @@ class Building < ActiveRecord::Base
   end
   
   def ready_in
-    if ready? and not ready_at.nil?
+    unless ready? or ready_at.nil?
       ready_at - Time.now
     else
       0
     end
   end
   
+  def ready_or_new_record?
+    ready_in == 0
+  end
+  
+  def set_ready_at
+    write_attribute :ready_at, upgrade_time.from_now
+  end
+  
   def consume_resources
     resources = city.resources
-    if resources >= upgrade_resources
+    if ready_or_new_record? and resources >= upgrade_resources
       yield if block_given?
       if valid?
-        ready_at = Time.now
+        set_ready_at
         resources.subtract(upgrade_resources).save
         return true
       end
+    elsif not ready_or_new_record?
+      errors.add :ready_in, ready_in
     else
       errors.add :missing_resources, upgrade_resources.subtract_to_zero(resources)
     end

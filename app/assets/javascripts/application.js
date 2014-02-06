@@ -41,6 +41,16 @@ function ready() {
             style: 'qtip-wiki'
          });
      });
+     
+     $('.count').each(function() {
+       var count = $(this);
+       window.setInterval(function() {
+         if (count.text() > 1)
+           count.text(count.text() - 1);
+         else
+           count.parent().parent().text("Fertig");
+       }, 1000);
+     });
 }
 $(document).ready(ready);
 $(document).on('page:load', ready);
