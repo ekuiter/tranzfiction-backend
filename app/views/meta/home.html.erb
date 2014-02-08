@@ -15,9 +15,9 @@
   <li><%= link_to city.name, city, class: [:big, :ajax] %>
     <sub>
       <%= city.resources.to_json %>
-      | <%= link_to "Abreißen", destroy_city_path(id: city.id), target: :_blank, confirm: "Sicher?" %>
+      | <%= link_to "Abreißen", destroy_city_path(id: city.id), target: :_blank, data: { confirm: "Sicher?" } %>
       <% if current_user.admin? %>
-        | <%= link_to "Leeren", reset_city_path(id: city.id), target: :_blank, confirm: "Sicher?" %>
+        | <%= link_to "Leeren", reset_city_path(id: city.id), target: :_blank, data: { confirm: "Sicher?" } %>
         <% end %>
     </sub>
     <ul>
@@ -31,7 +31,7 @@
           <% else %>
             <span>Fertig in <strong><span class="count"><%= building.ready_in.round %></span>s</strong></span>
           <% end %>
-          | <%= link_to "Abreißen", destroy_building_path(city_id: city.id, building_id: building.id), target: :_blank, confirm: "Sicher?" %>
+          | <%= link_to "Abreißen", destroy_building_path(city_id: city.id, building_id: building.id), target: :_blank, data: { confirm: "Sicher?" } %>
           <% if current_user.admin? %>
             | <%= link_to "Downgrade", downgrade_building_path(city_id: city.id, building_id: building.id), target: :_blank %>
           <% end %>

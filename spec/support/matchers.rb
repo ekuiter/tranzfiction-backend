@@ -1,9 +1,22 @@
+def hash_from_json(json)
+  hash = JSON.parse(json)
+  if hash.respond_to? :except
+    hash.except!("ready_in")
+  end
+end
+
+def hash_from_model(model)
+  hash = JSON.parse(model.to_json)
+  if hash.respond_to? :except
+    hash.except!("ready_in")
+  end
+end
+
 RSpec::Matchers.define :be_json do |expected|
   match do |actual|
-    begin
-      JSON.parse(actual)
+   begin
       if expected
-        actual == expected.to_json
+        hash_from_json(actual) == hash_from_model(expected)
       else
         true
       end

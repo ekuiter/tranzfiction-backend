@@ -1,10 +1,26 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_filter :authenticate_user!
+  
   around_filter :catch
   before_filter :permit, if: :devise_controller?
   
+  if Rails.env.test?
+    before_filter :authenticate_user!
+  else
+    before_filter :custom_authenticate_user!
+  end
+  
   private
+  
+  def custom_authenticate_user!
+    if current_user
+    elsif params[:controller].starts_with? "devise/" or params[:controller].starts_with? "authentication/"
+    elsif params[:controller] == "meta" and params[:action] == "home"
+      redirect_to new_user_session_path
+    else
+      render text: "Nicht angemeldet", status: 401
+    end
+  end
   
   def catch
     yield

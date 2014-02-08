@@ -2,6 +2,11 @@ require "spec_helper"
 
 describe Building do
   let(:building) { create(:building) }
+  let(:built_building) do 
+    b = create(:building)
+    b.update_attributes ready_at: Time.now
+    b
+  end
   let(:lvl2_building) { create(:building, level: 2) }
   it("has a valid factory") { expect(building).to be_valid }
   it("is invalid without a city") { expect(build(:building, city: nil)).not_to be_valid }
@@ -35,20 +40,23 @@ describe Building do
     describe "upgrade" do  
       context "with resources" do
         it "upgrades" do
-          building.city.resources = create(:resources)
-          expect { building.upgrade! }.to change { building.level }.by(1)
-          old_resources = building.city.resources
-          new_resources = old_resources - building.upgrade_resources
-          building.upgrade!
-          expect(building.city.resources).to eq new_resources
+          built_building.city.resources = create(:resources)
+          old_resources = built_building.city.resources
+          new_resources = old_resources - built_building.upgrade_resources
+          level = built_building.level
+          built_building.upgrade!
+          expect(built_building.level).to eq level + 1
+          expect(built_building.city.resources).to eq new_resources
         end
       end
       
       context "without resources" do
         it "does not upgrade" do
-          building.city.resources.empty!
-          expect { building.upgrade! }.not_to change { building.level }.by(1)
-          expect(building.errors.messages[:missing_resources].first).to eq building.upgrade_resources.subtract_to_zero(building.city.resources)
+          built_building.city.resources.empty!
+          expect { built_building.upgrade! }.not_to change { built_building.level }.by(1)
+          expect(built_building.errors.messages[:missing_resources].first).to(
+            eq(built_building.upgrade_resources.subtract_to_zero(built_building.city.resources))
+          )
         end
       end
     end

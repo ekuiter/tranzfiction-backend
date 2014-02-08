@@ -2,6 +2,11 @@ require "spec_helper"
 
 describe BuildingController do
   let(:building) { create(:building, city: create(:city, user: user)).cast }
+  let(:built_building) do 
+    b = create(:building, city: create(:city, user: user)).cast
+    b.update_attributes ready_at: Time.now
+    b
+  end
   let(:lvl2_building) { create(:building, city: create(:city, user: user), level: 2).cast }
   let(:city) { building.city }
   let(:buildings) { city.buildings }
@@ -66,11 +71,11 @@ describe BuildingController do
       context "with city and building" do
         context "with resources" do
           before do
-            city.resources = create(:resources)
-            get :upgrade, city_id: city.id, building_id: building.id
+            built_building.city.resources = create(:resources)
+            get :upgrade, city_id: built_building.city.id, building_id: built_building.id
           end
-          assigns(:city, :building).renders(:json) { building.reload }
-          it("upgrades @building") { expect(building.reload.level).to eq 2 }
+          assigns(:city) { built_building.city }.assigns(:building) { built_building }.renders(:json) { built_building.reload }
+          it("upgrades @building") { expect(built_building.reload.level).to eq 2 }
         end
         
         context "without resources" do

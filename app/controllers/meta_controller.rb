@@ -1,8 +1,13 @@
 class MetaController < ApplicationController  
   skip_before_filter :authenticate_user!, only: [:user]
+  skip_before_filter :custom_authenticate_user!, only: [:user]
   
   def home
-    @cities = current_user.cities.includes([:buildings, :resources])
+    if cookies[:frontend_login] == "true"
+      redirect_to "http://tranzfiction.com"
+    else
+      @cities = current_user.cities.includes([:buildings, :resources])
+    end
   end
   
   def api
