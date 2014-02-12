@@ -9,12 +9,6 @@ module Defaults
     end
   end
   
-  module City
-    def self.build_speed
-      1
-    end
-  end
-  
   module Routes
     def self.frontend_url
       "http://tranzfiction.com/"

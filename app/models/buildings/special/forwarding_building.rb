@@ -1,11 +1,9 @@
 class ForwardingBuilding < SpecialBuilding
-  #Spediteur, der an die Erde liefert (erst Erforschung von Weltraumlift nötig, dann erhöht durch Teleporter ...)
-  def title
-    "Spedition"
+  def upgrade_resources
+    Resources.by_formula level: level, efactor: 0.25, silicon: 50, plastic: 40, graphite: 30
   end
   
-  def description
-    "Die Spedition erlaubt es dir, mit anderen Spielern zu handeln. "+
-    "Du kannst Rohstoffe sowie Forschungsergebnisse austauschen."
+  def time_factor
+    450
   end
 end

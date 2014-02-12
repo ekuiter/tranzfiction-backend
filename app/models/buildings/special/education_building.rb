@@ -1,9 +1,9 @@
 class EducationBuilding < SpecialBuilding
-  def title
-    case level
-      when 1..2 then "Grundschule"
-      when 3..4 then "Gymnasium"
-      when 5..infinity then "Universität"
-    end
+  def upgrade_resources
+    Resources.by_formula level: level, efactor: 0.25, silicon: 50, plastic: 35, graphite: 45
+  end
+  
+  def time_factor
+    430
   end
 end

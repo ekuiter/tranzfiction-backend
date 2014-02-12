@@ -1,11 +1,11 @@
 require "spec_helper"
 
 describe Building do
-  let(:building) { create(:building) }
+  let(:building) { create(:building).cast }
   let(:built_building) do 
     b = create(:building)
     b.update_attributes ready_at: Time.now
-    b
+    b.cast
   end
   let(:lvl2_building) { create(:building, level: 2) }
   it("has a valid factory") { expect(building).to be_valid }
@@ -92,7 +92,7 @@ describe Building do
   describe "ready" do
     context "new building" do
       it("is not ready") { expect(building.ready?).to be_false }
-      it("is ready_in") { expect(building.ready_in).to be_close building.upgrade_time, 1 }
+      it("is ready_in") { expect(building.ready_in).to be_within(1).of(building.upgrade_time) }
     end
     
     context "built building" do

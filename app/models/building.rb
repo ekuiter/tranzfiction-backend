@@ -18,8 +18,16 @@ class Building < ActiveRecord::Base
   
   def to_s
     Jbuilder.new do |json|
-      json.(self, :id, :level, :type, :energy_consumption, :upgrade_resources, :ready_in)
+      json.(self, :id, :level, :type, :energy_consumption, :upgrade_resources)
+      json.upgrade_time upgrade_time.ceil
+      json.ready_in ready_in.ceil
     end.target!
+  end
+  
+  # löst exponentielle Gleichungen à la: y = factor * e^(efactor*x)
+  def self.solve_formula(hash)
+    result = hash[:factor] * Math.exp(hash[:efactor] * hash[:level])
+    result.round -1
   end
   
   def valid_type
@@ -33,16 +41,16 @@ class Building < ActiveRecord::Base
     errors.add(:type, "ungültig") unless valid
   end
   
+  # fürs Erste ein fixer Energieverbrauch, der proportional mit dem Level steigt
   def energy_consumption
-    stub "Energieverbrauch fehlt"
+    level * 5
   end
   
-  def upgrade_resources
-    Resources.new silicon: 50, plastic: 50, graphite: 50
-  end
-  
+  # Die Upgrade-Zeit wurde durch Regression berechnet (Beispiel siehe buildings/resource/silicon_building.rb).
+  # Jedes Building hat durch time_factor individuelle Werte.
   def upgrade_time
-    180
+    time = Building.solve_formula level: level, factor: cast.time_factor, efactor: 0.4
+    time / city.build_speed
   end
   
   def ready?
@@ -63,12 +71,13 @@ class Building < ActiveRecord::Base
   end
   
   def set_ready_at
-    write_attribute :ready_at, upgrade_time.from_now
+      write_attribute :ready_at, cast.upgrade_time.from_now
   end
   
   def consume_resources
     resources = city.resources
-    if ready_or_new_record? and resources >= upgrade_resources
+    upgrade_resources = cast.upgrade_resources
+    if ready_or_new_record? and resources >= cast.upgrade_resources
       yield if block_given?
       if valid?
         set_ready_at
@@ -78,7 +87,7 @@ class Building < ActiveRecord::Base
     elsif not ready_or_new_record?
       errors.add :ready_in, ready_in
     else
-      errors.add :missing_resources, upgrade_resources.subtract_to_zero(resources)
+      errors.add :missing_resources, cast.upgrade_resources.subtract_to_zero(resources)
     end
     false
   end
@@ -128,20 +137,6 @@ class Building < ActiveRecord::Base
       tree[type.constantize.superclass.to_s.to_sym].push type
     end
     tree
-  end
-  
-  private
-  
-  # Unendlichkeit (wird für die einzelnen Gebäudetypen benötigt)
-  def infinity
-    +1.0 / 0.0 # Wert der positiven Unendlichkeit in Ruby
-  end
-  
-  # diese Funktionen sind für jeden Gebäudetyp spezifisch,
-  # hier geben sie als Platzhalter Fehlermeldungen zurück
-  
-  def stub message
-    "#{self.class.to_s}: #{message}"
   end
   
 end

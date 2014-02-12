@@ -15,6 +15,19 @@ class Resources < ActiveRecord::Base
     instance
   end
   
+  # Berechnung der Upgrade-Ressourcen
+  # (Beispiel siehe buildings/resource/silicon_building.rb)
+  # (solve_formula siehe building.rb)
+  def self.by_formula(hash)
+    solve = Proc.new do |factor|
+      Building.solve_formula level: hash[:level], factor: factor, efactor: hash[:efactor]
+    end
+    silicon = solve.call hash[:silicon]
+    plastic = solve.call hash[:plastic]
+    graphite = solve.call hash[:graphite]
+    new silicon: silicon, plastic: plastic, graphite: graphite
+  end
+  
   def as_json(methods=nil, type=:integer)
     JSON.parse to_s(type)
   end

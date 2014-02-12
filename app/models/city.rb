@@ -28,7 +28,13 @@ class City < ActiveRecord::Base
   end
   
   def build_speed
-    Defaults::City::build_speed
+    hqbuilding = buildings.where(type: "HQBuilding").first
+    return 1 unless hqbuilding
+    if hqbuilding.ready?
+      hqbuilding.affect_build_speed
+    else
+      hqbuilding.affect_build_speed level: hqbuilding.level - 1
+    end
   end
   
   def ready_buildings
@@ -40,7 +46,7 @@ class City < ActiveRecord::Base
   private
   
   def create_resources
-    assign_attributes resources: Resources.create(silicon: 200, plastic: 200, graphite: 200) unless resources
+    assign_attributes resources: Resources.create(silicon: 500, plastic: 500, graphite: 500) unless resources
   end
   
   def city_limit
