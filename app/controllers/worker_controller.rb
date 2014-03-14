@@ -1,5 +1,5 @@
 class WorkerController < ApplicationController
-  skip_before_filter :authenticate_user!
+  skip_before_filter :authenticate_user!, :custom_authenticate_user!
   around_filter :authenticate_worker
 
   def gain
