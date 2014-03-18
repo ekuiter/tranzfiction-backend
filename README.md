@@ -4,7 +4,7 @@
 
 *Das Spiel kann hier gespielt werden: http://tranzfiction.com. Das in diesem Repository enthaltene Backend läuft auf einem einfachen Heroku-Server und kann hier aufgerufen werden: http://api.tranzfiction.com.*
 
-tranzfiction ist ein einfaches Browserspiel, das als Anwendungsbeispiel für eine datenbankorientierte Ruby-on-Rails-API dient. Es wird Gegenstand meiner Seminararbeit sein, die, sobald fertiggestellt, hier verlinkt werden wird.
+tranzfiction ist ein einfaches Browserspiel, das als Anwendungsbeispiel für eine datenbankorientierte Ruby-on-Rails-API dient. Es ist Gegenstand meiner Seminararbeit, zu finden auf http://elias-kuiter.de/facharbeit.
 
 Wer Travian gespielt hat, kann sich das grundlegende Modell vorstellen:
 Es gibt Spieler (`User`). Diese besitzen Siedlungen/Städte (`City`). Diese wiederum enthalten Gebäude (`Building`) unterschiedlichster Art. Um Gebäude etc. zu bauen, werden Rohstoffe (`Resources`) benötigt, welche durch ein `ResourceBuilding` abgebaut werden. Außerdem ist `Energy` zum Betrieb von Gebäuden notwendig (Versorgung erfolgt durch das `EnergyBuilding`).
