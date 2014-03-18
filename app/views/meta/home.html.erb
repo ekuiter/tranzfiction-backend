@@ -1,7 +1,8 @@
 <% title "Start" %>
 
 <p>Dies ist das Backend von tranzfiction.</p>
-<p>Um zu spielen, besuche <%= link_to "das Frontend", Defaults::Routes::frontend_url %>.</p>
+<p>Um zu spielen, besuche hier das Frontend:</p>
+<%= link_to "Spielen!", Defaults::Routes::frontend_url, class: "play-btn" %>
 
 <h3>Spielstand</h3>
 

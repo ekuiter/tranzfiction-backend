@@ -5,7 +5,7 @@ module Defaults
     end
     
     def self.registerable
-      false
+      true
     end
   end
   

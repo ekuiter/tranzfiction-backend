@@ -32,3 +32,21 @@ li.spaced {
   border-radius: 10px;
   border: 1px solid #fbb;
 }
+
+.play-btn {
+  display: block;
+  border: 1px solid black;
+  background-color: #428bca;
+  font-size: 20px;
+  width: 200px;
+  padding: 7px;
+  margin: 3px 0;
+  text-align: center;
+  color: white;
+}
+
+.play-btn:hover {
+  color: white;
+  background-color: #64adec;
+  text-decoration: none;
+}
