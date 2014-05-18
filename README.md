@@ -1,4 +1,4 @@
-# tranzfiction-backend
+# tranzfiction-backend [![Code Climate](https://codeclimate.com/github/ekuiter/tranzfiction-backend.png)](https://codeclimate.com/github/ekuiter/tranzfiction-backend)
 
 **tranzfiction ist ein Travian-Klon, basierend auf Ruby on Rails im Backend und JavaScript im Frontend.**
 
