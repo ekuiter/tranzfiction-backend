@@ -18,7 +18,16 @@ class ApplicationController < ActionController::Base
     elsif params[:controller] == "meta" and params[:action] == "home"
       redirect_to new_user_session_path
     else
-      render text: "Nicht angemeldet", status: 401
+      begin
+        user = User.where(email: params[:email]).first
+        if user.valid_password?(params[:password])
+          sign_in user, store: false
+        else
+          raise
+        end
+      rescue
+        render text: "Nicht angemeldet", status: 401
+      end
     end
   end
   

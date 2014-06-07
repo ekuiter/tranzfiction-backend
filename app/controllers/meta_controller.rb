@@ -15,6 +15,15 @@ class MetaController < ApplicationController
   end
   
   def user
+    begin
+      user = User.where(email: params[:email]).first
+      if user.valid_password?(params[:password])
+        sign_in user, store: false
+      else
+        raise
+      end
+    rescue
+    end
     @user = current_user
     render json: @user
   end
