@@ -14,15 +14,4 @@ module Defaults
       "http://tranzfiction.com/"
     end
   end
-  
-  module Worker
-    def self.password
-      if Rails.env.production?
-        ENV['WORKER_PASSWORD']
-      else
-        config = HashWithIndifferentAccess.new(YAML.load(File.read(Rails.root.join("config", "database.yml"))))
-        config[:worker_password]
-      end
-    end
-  end
 end

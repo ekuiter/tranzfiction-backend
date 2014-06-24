@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Tranzfiction::Application.config.secret_key_base = '952a97e821d9a3a05107e24287631811d9cd3a927d793384b65dfc98f1df79ed6cba59bf67cfa209f550a386cb2799c815c6dec0b86efe2cadcf2fe86fc2757e'
+Tranzfiction::Application.config.secret_key_base = Settings.secret_token
