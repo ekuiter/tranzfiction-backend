@@ -2,7 +2,7 @@
 
 **tranzfiction ist ein Travian-Klon, basierend auf Ruby on Rails im Backend und JavaScript im Frontend.**
 
-*Das Spiel kann hier gespielt werden: http://tranzfiction.com. Das in diesem Repository enthaltene Backend läuft auf einem einfachen Heroku-Server und kann hier aufgerufen werden: http://api.tranzfiction.com.*
+*Das Spiel kann zur Zeit nicht gespielt werden. Das in diesem Repository enthaltene Backend ist jedoch grundsätzlich auf Heroku lauffähig.*
 
 tranzfiction ist ein einfaches Browserspiel, das als Anwendungsbeispiel für eine datenbankorientierte Ruby-on-Rails-API dient. Es ist Gegenstand meiner Seminararbeit, zu finden auf http://elias-kuiter.de/facharbeit.
 
@@ -13,7 +13,7 @@ Als Punktemodell ist zunächst eine einfache Bepunktung vorgesehen, die auf Anza
 
 All diese Funktionen sind über das Backend zugänglich. So kann man ein neues Gebäude durch diesen einfachen Aufruf bauen (Authentifizierung vorausgesetzt):
 ```
-http://api.tranzfiction.com/city/<City-ID>/building/create?building[type]=<Gebäudetyp>
+http://dein-server.de/city/<City-ID>/building/create?building[type]=<Gebäudetyp>
 ```
 Diese API wird dann vom Frontend genutzt, welches in HTML, CSS und JavaScript programmiert ist und letztendlich die Schnittstelle zum Spieler darstellt.
 
@@ -27,4 +27,3 @@ Zugleich stellt das Repository aber auch den eigentlichen Programmcode dar, soda
   
 (Und noch ein Hinweis: Das Spiel ist für den Produktivbetrieb mit Heroku geschrieben. Andere Plattformen sind wahrscheinlich möglich, allerdings nicht ohne den Code anzupassen.)
 
-*Rechtliches:* Da tranzfiction vor allem ein Beispiel ("showcase") einer Rails-Applikation für meine Facharbeit sein soll, ist das Projekt nicht Open Source. Der Code darf gelesen und auch für einen Testserver, nicht aber einen öffentlich zugänglichen Server genutzt werden. Veränderungen am Code in geringem Maße sind erlaubt (Konfiguration etc.), aber keine größeren Änderungen an der Architektur, API oder den Features. Das Projekt darf nicht kommerziell genutzt werden.
